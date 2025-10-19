@@ -1,0 +1,119 @@
+<!-- exam-result.wxml -->
+
+<!-- 页面头 -->
+<view class="page-header">
+  <text class="page-header-title">测试结果</text>
+</view>
+<view class="page-header-placeholder"></view>
+
+<view class="container">
+  <!-- 总体得分 -->
+  <view class="score-section">
+    <view class="score-card">
+      <view class="score-display">
+        <view class="score-circle">
+          <text class="score-value">{{examResult.score}}</text>
+          <text class="score-unit">分</text>
+        </view>
+        <text class="score-grade">{{examResult.grade}}</text>
+        <text class="score-desc">您在{{examResult.totalQuestions}}道题目中答对了{{examResult.correctCount}}道</text>
+      </view>
+
+      <view class="score-breakdown">
+        <view class="breakdown-item">
+          <text class="breakdown-value">{{examResult.fillScore}}/{{examResult.fillTotal}}</text>
+          <text class="breakdown-label">填空题得分</text>
+        </view>
+        <view class="breakdown-item">
+          <text class="breakdown-value">{{examResult.essayScore}}/{{examResult.essayTotal}}</text>
+          <text class="breakdown-label">问答题得分</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 题目详细分析 -->
+  <view class="analysis-section">
+    <view class="analysis-card">
+      <view class="section-header">
+        <text class="section-title">逐题分析</text>
+      </view>
+
+      <view class="question-analysis">
+        <block wx:for="{{examResult.questions}}" wx:key="id">
+          <view class="analysis-item {{item.status}}">
+            <view class="item-header">
+              <view class="status-badge {{item.status}}">{{item.statusText}}</view>
+              <text class="question-meta">第{{item.id}}题 • {{item.typeText}}</text>
+            </view>
+            
+            <view class="question-content">
+              <text class="question-text">{{item.question}}</text>
+              
+              <view class="answer-comparison">
+                <view class="answer-item">
+                  <text class="answer-label">您的答案：</text>
+                  <text class="answer-text {{item.status === 'correct' ? 'correct' : 'wrong'}}">{{item.userAnswer}}</text>
+                </view>
+                <view class="answer-item" wx:if="{{item.status !== 'correct'}}">
+                  <text class="answer-label">参考答案：</text>
+                  <text class="answer-text correct">{{item.correctAnswer}}</text>
+                </view>
+              </view>
+
+              <!-- 问答题AI评估 -->
+              <view class="ai-feedback" wx:if="{{item.type === 'essay'}}">
+                <text class="feedback-label">AI评估：</text>
+                <text class="feedback-text">{{item.aiFeedback}}</text>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <!-- AI综合评估 -->
+  <view class="summary-section">
+    <view class="summary-card">
+      <view class="section-header">
+        <text class="section-title">AI综合评估与复习建议</text>
+      </view>
+
+      <view class="knowledge-assessment">
+        <text class="assessment-title">知识掌握情况</text>
+        <view class="knowledge-list">
+          <block wx:for="{{examResult.knowledgeAssessment}}" wx:key="topic">
+            <view class="knowledge-item">
+              <text class="topic-name">{{item.topic}}</text>
+              <text class="topic-level {{item.level}}">{{item.levelText}}</text>
+            </view>
+          </block>
+        </view>
+      </view>
+
+      <view class="review-suggestions">
+        <text class="suggestions-title">复习建议</text>
+        <view class="suggestions-list">
+          <block wx:for="{{examResult.reviewSuggestions}}" wx:key="id">
+            <view class="suggestion-item">
+              <text class="suggestion-icon">💡</text>
+              <text class="suggestion-text">{{item.text}}</text>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-section">
+    <view class="action-buttons">
+      <button class="action-btn retest-btn" bindtap="retest">重新测试</button>
+      <button class="action-btn home-btn" bindtap="goHome">返回首页</button>
+    </view>
+  </view>
+</view>
+
+<!-- 底部悬浮菜单 -->
+<bottom-tabbar current-tab="{{2}}"></bottom-tabbar>

@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "AI软考管家",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "bottom-tabbar": "/components/bottom-tabbar/bottom-tabbar"
+  }
+}

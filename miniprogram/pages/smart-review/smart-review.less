@@ -1,0 +1,546 @@
+/* smart-review.wxss */
+@import '../../styles/adaptive.less';
+
+.container {
+  .responsive-container();
+  background-color: #f8fafc;
+  min-height: 100vh;
+  padding-bottom: 160rpx; /* 为底部悬浮菜单留出空间 */
+}
+
+/* 输入区域 */
+.input-section {
+  margin-bottom: 30rpx;
+}
+
+.input-card {
+  background: white;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 20rpx;
+  display: block;
+}
+
+.theme-input {
+  width: 100%;
+  height: 100rpx;
+  padding: 0 30rpx;
+  background: #f9fafb;
+  border: 2rpx solid #e5e7eb;
+  border-radius: 15rpx;
+  font-size: 28rpx;
+  margin-bottom: 20rpx;
+}
+
+.generate-btn {
+  width: 100%;
+  height: 80rpx;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 15rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+.generate-btn:disabled {
+  background: #9ca3af;
+  opacity: 0.6;
+}
+
+/* 内容区域 */
+.content-section {
+  margin-bottom: 30rpx;
+}
+
+.content-card {
+  background: white;
+  border-radius: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.section-header {
+  padding: 30rpx;
+  border-bottom: 1rpx solid #f3f4f6;
+}
+
+.section-subtitle {
+  font-size: 24rpx;
+  color: #6b7280;
+  margin-top: 5rpx;
+  display: block;
+}
+
+/* 加载状态 */
+.loading-state {
+  padding: 60rpx 30rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-spinner {
+  width: 40rpx;
+  height: 40rpx;
+  border: 4rpx solid #e5e7eb;
+  border-top: 4rpx solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20rpx;
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #6b7280;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 内容展示 */
+.content-display {
+  padding: 30rpx;
+}
+
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.content-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1f2937;
+  flex: 1;
+}
+
+.content-actions {
+  display: flex;
+  gap: 15rpx;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  padding: 15rpx 20rpx;
+  border: 2rpx solid #e5e7eb;
+  border-radius: 12rpx;
+  background: white;
+  font-size: 24rpx;
+  color: #374151;
+  gap: 8rpx;
+}
+
+.copy-btn:active {
+  background: #f0f9ff;
+  border-color: #3b82f6;
+}
+
+.test-btn:active {
+  background: #f0fdf4;
+  border-color: #10b981;
+}
+
+.btn-icon {
+  font-size: 20rpx;
+}
+
+.content-body {
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: #374151;
+}
+
+.content-body h3 {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 30rpx 0 20rpx 0;
+}
+
+.content-body h4 {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 25rpx 0 15rpx 0;
+}
+
+.content-body ul, .content-body ol {
+  margin: 15rpx 0;
+  padding-left: 40rpx;
+}
+
+.content-body li {
+  margin: 10rpx 0;
+}
+
+.content-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20rpx 0;
+}
+
+.content-body th, .content-body td {
+  border: 1rpx solid #d1d5db;
+  padding: 15rpx;
+  text-align: left;
+}
+
+.content-body th {
+  background: #f9fafb;
+  font-weight: 600;
+}
+
+.content-body strong {
+  color: #1f2937;
+  font-weight: 600;
+}
+
+/* 空状态 */
+.empty-state {
+  padding: 60rpx 30rpx;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+/* 提示区域 */
+.tips-section {
+  margin-bottom: 30rpx;
+}
+
+/* 响应式调整 */
+@media (max-width: 375px) {
+  .container {
+    padding: 15rpx;
+    padding-top: 100rpx;
+  }
+  
+  .input-card {
+    padding: 20rpx;
+  }
+  
+  .theme-input {
+    height: 80rpx;
+    font-size: 26rpx;
+    margin-bottom: 15rpx;
+  }
+  
+  .generate-btn {
+    height: 70rpx;
+    font-size: 26rpx;
+  }
+  
+  .section-header {
+    padding: 20rpx;
+  }
+  
+  .content-display {
+    padding: 20rpx;
+  }
+  
+  .content-title {
+    font-size: 28rpx;
+  }
+  
+  .action-btn {
+    padding: 12rpx 15rpx;
+    font-size: 22rpx;
+  }
+  
+  .content-body {
+    font-size: 26rpx;
+  }
+  
+  .content-body h3 {
+    font-size: 28rpx;
+    margin: 20rpx 0 15rpx 0;
+  }
+  
+  .content-body h4 {
+    font-size: 26rpx;
+    margin: 15rpx 0 10rpx 0;
+  }
+  
+  .tips-card {
+    padding: 20rpx;
+  }
+  
+  .tips-title {
+    font-size: 24rpx;
+  }
+  
+  .tips-desc {
+    font-size: 22rpx;
+  }
+  
+  .loading-state {
+    padding: 40rpx 20rpx;
+  }
+  
+  .loading-spinner {
+    width: 32rpx;
+    height: 32rpx;
+    border-width: 3rpx;
+  }
+  
+  .loading-text {
+    font-size: 26rpx;
+  }
+  
+  .empty-state {
+    padding: 40rpx 20rpx;
+  }
+  
+  .empty-icon {
+    font-size: 60rpx;
+  }
+  
+  .empty-text {
+    font-size: 26rpx;
+  }
+}
+
+/* 超小屏幕适配 */
+@media (max-width: 320px) {
+  .container {
+    padding: 10rpx;
+    padding-top: 90rpx;
+  }
+  
+  .input-card {
+    padding: 20rpx;
+  }
+  
+  .theme-input {
+    height: 80rpx;
+    font-size: 26rpx;
+    margin-bottom: 15rpx;
+  }
+  
+  .generate-btn {
+    height: 70rpx;
+    font-size: 26rpx;
+  }
+  
+  .section-header {
+    padding: 20rpx;
+  }
+  
+  .content-display {
+    padding: 20rpx;
+  }
+  
+  .content-title {
+    font-size: 28rpx;
+  }
+  
+  .action-btn {
+    padding: 12rpx 15rpx;
+    font-size: 22rpx;
+  }
+  
+  .content-body {
+    font-size: 26rpx;
+  }
+  
+  .content-body h3 {
+    font-size: 28rpx;
+    margin: 20rpx 0 15rpx 0;
+  }
+  
+  .content-body h4 {
+    font-size: 26rpx;
+    margin: 15rpx 0 10rpx 0;
+  }
+  
+  .tips-card {
+    padding: 20rpx;
+  }
+  
+  .tips-title {
+    font-size: 24rpx;
+  }
+  
+  .tips-desc {
+    font-size: 22rpx;
+  }
+  
+  .loading-state {
+    padding: 40rpx 20rpx;
+  }
+  
+  .loading-spinner {
+    width: 32rpx;
+    height: 32rpx;
+    border-width: 3rpx;
+  }
+  
+  .loading-text {
+    font-size: 26rpx;
+  }
+  
+  .empty-state {
+    padding: 40rpx 20rpx;
+  }
+  
+  .empty-icon {
+    font-size: 60rpx;
+  }
+  
+  .empty-text {
+    font-size: 26rpx;
+  }
+}
+
+@media (min-width: 414px) {
+  .container {
+    padding: 25rpx;
+    padding-top: 130rpx;
+  }
+  
+  .input-card {
+    padding: 40rpx;
+  }
+  
+  .theme-input {
+    height: 120rpx;
+    font-size: 30rpx;
+    margin-bottom: 25rpx;
+  }
+  
+  .generate-btn {
+    height: 90rpx;
+    font-size: 30rpx;
+  }
+  
+  .section-header {
+    padding: 40rpx;
+  }
+  
+  .content-display {
+    padding: 40rpx;
+  }
+  
+  .content-title {
+    font-size: 36rpx;
+  }
+  
+  .action-btn {
+    padding: 18rpx 25rpx;
+    font-size: 26rpx;
+  }
+  
+  .content-body {
+    font-size: 30rpx;
+  }
+  
+  .content-body h3 {
+    font-size: 36rpx;
+    margin: 40rpx 0 25rpx 0;
+  }
+  
+  .content-body h4 {
+    font-size: 32rpx;
+    margin: 30rpx 0 20rpx 0;
+  }
+  
+  .tips-card {
+    padding: 40rpx;
+  }
+  
+  .tips-title {
+    font-size: 28rpx;
+  }
+  
+  .tips-desc {
+    font-size: 26rpx;
+  }
+  
+  .loading-state {
+    padding: 80rpx 40rpx;
+  }
+  
+  .loading-spinner {
+    width: 48rpx;
+    height: 48rpx;
+    border-width: 5rpx;
+  }
+  
+  .loading-text {
+    font-size: 30rpx;
+  }
+  
+  .empty-state {
+    padding: 80rpx 40rpx;
+  }
+  
+  .empty-icon {
+    font-size: 100rpx;
+  }
+  
+  .empty-text {
+    font-size: 30rpx;
+  }
+}
+
+.tips-card {
+  background: #fffbeb;
+  border: 1rpx solid #fcd34d;
+  border-radius: 15rpx;
+  padding: 30rpx;
+  display: flex;
+  align-items: flex-start;
+  gap: 20rpx;
+}
+
+.tips-icon {
+  font-size: 32rpx;
+  color: #d97706;
+  flex-shrink: 0;
+}
+
+.tips-content {
+  flex: 1;
+}
+
+.tips-title {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #92400e;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.tips-desc {
+  font-size: 24rpx;
+  color: #92400e;
+  display: block;
+  margin-bottom: 5rpx;
+  line-height: 1.4;
+}

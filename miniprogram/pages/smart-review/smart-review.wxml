@@ -1,0 +1,84 @@
+<!-- smart-review.wxml -->
+
+<!-- 页面头 -->
+<view class="page-header">
+  <text class="page-header-title">智能复习</text>
+</view>
+<view class="page-header-placeholder"></view>
+
+<view class="container">
+  <!-- 复习主题输入 -->
+  <view class="input-section">
+    <view class="input-card">
+      <text class="section-title">输入复习主题</text>
+      <input 
+        class="theme-input" 
+        placeholder="请输入您想复习的知识点，如 TCP/IP、软件工程、数据库原理等"
+        bindinput="onThemeInput"
+        value="{{reviewTheme}}"
+      />
+      <button class="generate-btn" bindtap="generateReviewPoints" disabled="{{!reviewTheme || isGenerating}}">
+        {{isGenerating ? '生成中...' : '生成复习要点'}}
+      </button>
+    </view>
+  </view>
+
+  <!-- AI生成内容区域 -->
+  <view class="content-section">
+    <view class="content-card">
+      <view class="section-header">
+        <text class="section-title">AI生成的复习要点</text>
+        <text class="section-subtitle">基于您的知识库内容生成</text>
+      </view>
+
+      <!-- 加载状态 -->
+      <view class="loading-state" wx:if="{{isGenerating}}">
+        <view class="loading-spinner"></view>
+        <text class="loading-text">AI正在思考中...</text>
+      </view>
+
+      <!-- 内容展示 -->
+      <view class="content-display" wx:if="{{!isGenerating && reviewContent}}">
+        <view class="content-header">
+          <text class="content-title">{{reviewTheme}}复习要点</text>
+          <view class="content-actions">
+            <button class="action-btn copy-btn" bindtap="copyContent">
+              <text class="btn-icon">📋</text>
+              复制内容
+            </button>
+            <button class="action-btn test-btn" bindtap="startTest">
+              <text class="btn-icon">📝</text>
+              开始测试
+            </button>
+          </view>
+        </view>
+
+        <view class="content-body">
+          <rich-text nodes="{{reviewContent}}"></rich-text>
+        </view>
+      </view>
+
+      <!-- 初始提示 -->
+      <view class="empty-state" wx:if="{{!isGenerating && !reviewContent}}">
+        <text class="empty-icon">💡</text>
+        <text class="empty-text">请在上方输入复习主题，点击"生成复习要点"按钮开始使用AI智能复习功能。</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 使用提示 -->
+  <view class="tips-section">
+    <view class="tips-card">
+      <text class="tips-icon">💡</text>
+      <view class="tips-content">
+        <text class="tips-title">使用提示</text>
+        <text class="tips-desc">• 输入具体的知识点名称可以获得更精准的复习要点</text>
+        <text class="tips-desc">• 生成内容后可以复制到其他应用或直接开始模拟测试</text>
+        <text class="tips-desc">• 确保您的知识库中有相关文档以获得最佳效果</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 底部悬浮菜单 -->
+<bottom-tabbar current-tab="{{2}}"></bottom-tabbar>

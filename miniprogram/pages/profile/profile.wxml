@@ -1,0 +1,126 @@
+<!-- profile.wxml -->
+
+<!-- 页面头 -->
+<view class="page-header">
+  <text class="page-header-title">个人中心</text>
+</view>
+<view class="page-header-placeholder"></view>
+
+<view class="container">
+  <!-- 用户信息头部 -->
+  <view class="header-section">
+    <view class="user-card">
+      <view class="user-info">
+        <image class="user-avatar" src="/images/avatar.png" mode="aspectFill"></image>
+        <view class="user-details">
+          <text class="user-name">{{userInfo.name}}</text>
+          <text class="user-level">{{userInfo.level}} • 学习{{userInfo.studyDays}}天</text>
+        </view>
+      </view>
+      <view class="progress-section">
+        <view class="progress-circle">
+          <view class="progress-ring" style="transform: rotate({{progressPercentage * 3.6}}deg);"></view>
+          <text class="progress-text">{{progressPercentage}}%</text>
+        </view>
+        <text class="progress-label">学习进度</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 个人中心功能菜单 -->
+  <view class="menu-section">
+    <view class="menu-grid">
+      <view class="menu-item" bindtap="navigateToEditProfile">
+        <view class="menu-icon">👤</view>
+        <text class="menu-title">个人信息</text>
+        <text class="menu-desc">修改个人资料</text>
+      </view>
+      
+      <view class="menu-item" bindtap="navigateToStudyRecords">
+        <view class="menu-icon">📊</view>
+        <text class="menu-title">学习记录</text>
+        <text class="menu-desc">查看学习统计</text>
+      </view>
+      
+      <view class="menu-item" bindtap="navigateToAchievements">
+        <view class="menu-icon">🏆</view>
+        <text class="menu-title">成就系统</text>
+        <text class="menu-desc">查看学习成就</text>
+      </view>
+      
+      <view class="menu-item" bindtap="navigateToSettings">
+        <view class="menu-icon">⚙️</view>
+        <text class="menu-title">系统设置</text>
+        <text class="menu-desc">个性化配置</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 学习统计 -->
+  <view class="stats-section">
+    <view class="stats-card">
+      <view class="section-header">
+        <text class="section-title">学习统计</text>
+      </view>
+      <view class="stats-grid">
+        <view class="stat-item">
+          <text class="stat-value">{{studyStats.totalHours}}</text>
+          <text class="stat-label">学习时长(小时)</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-value">{{studyStats.completedExams}}</text>
+          <text class="stat-label">完成测试</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-value">{{studyStats.correctRate}}%</text>
+          <text class="stat-label">正确率</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-value">{{studyStats.continuousDays}}</text>
+          <text class="stat-label">连续学习</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 联系方式 -->
+  <view class="contact-section">
+    <view class="contact-card">
+      <view class="section-header">
+        <text class="section-title">联系方式</text>
+      </view>
+      <view class="contact-content">
+        <view class="contact-item" bindtap="showContactQRCode">
+          <view class="contact-icon">💬</view>
+          <view class="contact-info">
+            <text class="contact-title">客服微信</text>
+            <text class="contact-desc">点击查看二维码添加好友</text>
+          </view>
+          <view class="contact-arrow">›</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+
+  <!-- 联系方式弹窗 -->
+  <view class="contact-modal {{showContactModal ? 'show' : ''}}" bindtap="hideContactModal">
+    <view class="modal-content" catchtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">添加客服微信</text>
+        <view class="modal-close" bindtap="hideContactModal">×</view>
+      </view>
+      <view class="qr-code-section">
+        <image class="qr-code-image" src="/images/lianxifangshi.jpg" mode="aspectFit"></image>
+        <text class="qr-code-tip">长按二维码保存图片，微信扫一扫添加好友</text>
+      </view>
+      <view class="modal-footer">
+        <text class="contact-info">客服工作时间：9:00-18:00</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 底部悬浮菜单 -->
+<bottom-tabbar current-tab="{{3}}"></bottom-tabbar>

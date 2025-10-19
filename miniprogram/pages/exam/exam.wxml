@@ -1,0 +1,125 @@
+<!-- exam.wxml -->
+
+<!-- 页面头 -->
+<view class="page-header">
+  <text class="page-header-title">模拟测试</text>
+</view>
+<view class="page-header-placeholder"></view>
+
+<view class="container">
+  <!-- 测试信息 -->
+  <view class="exam-info">
+    <view class="info-card">
+      <view class="info-header">
+        <text class="exam-title">{{examData.title}}</text>
+        <text class="exam-stats">共{{examData.totalQuestions}}题 • 预计用时{{examData.estimatedTime}}分钟</text>
+      </view>
+      <view class="progress-info">
+        <text class="progress-text">{{currentQuestion}}/{{examData.totalQuestions}}</text>
+        <text class="progress-label">当前进度</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 题目区域 -->
+  <view class="question-section">
+    <view class="question-card">
+      <!-- 题目头部 -->
+      <view class="question-header">
+        <view class="question-meta">
+          <text class="question-type {{currentQuestionData.type}}">{{currentQuestionData.typeText}}</text>
+          <text class="question-number">第{{currentQuestion}}题</text>
+        </view>
+      </view>
+
+      <!-- 题目内容 -->
+      <view class="question-content">
+        <text class="question-text">{{currentQuestionData.question}}</text>
+
+        <!-- 填空题 -->
+        <view class="answer-input" wx:if="{{currentQuestionData.type === 'fill'}}">
+          <input 
+            class="fill-input" 
+            placeholder="请输入答案"
+            value="{{userAnswers[currentQuestion - 1]}}"
+            bindinput="onAnswerInput"
+          />
+        </view>
+
+        <!-- 选择题 -->
+        <view class="answer-options" wx:if="{{currentQuestionData.type === 'choice'}}">
+          <block wx:for="{{currentQuestionData.options}}" wx:key="id">
+            <view 
+              class="option-item {{userAnswers[currentQuestion - 1] === item.id ? 'selected' : ''}}"
+              bindtap="selectOption"
+              data-option="{{item.id}}"
+            >
+              <text class="option-label">{{item.label}}</text>
+              <text class="option-text">{{item.text}}</text>
+            </view>
+          </block>
+        </view>
+
+        <!-- 问答题 -->
+        <view class="answer-textarea" wx:if="{{currentQuestionData.type === 'essay'}}">
+          <textarea 
+            class="essay-textarea"
+            placeholder="请在此输入您的答案..."
+            value="{{userAnswers[currentQuestion - 1]}}"
+            bindinput="onAnswerInput"
+            maxlength="500"
+          />
+          <text class="word-count">{{userAnswers[currentQuestion - 1] ? userAnswers[currentQuestion - 1].length : 0}}/500</text>
+        </view>
+      </view>
+
+      <!-- 导航按钮 -->
+      <view class="navigation-buttons">
+        <button 
+          class="nav-btn prev-btn" 
+          bindtap="prevQuestion"
+          disabled="{{currentQuestion === 1}}"
+        >
+          上一题
+        </button>
+        <button 
+          class="nav-btn next-btn" 
+          bindtap="nextQuestion"
+          wx:if="{{currentQuestion < examData.totalQuestions}}"
+        >
+          下一题
+        </button>
+        <button 
+          class="nav-btn submit-btn" 
+          bindtap="showSubmitModal"
+          wx:if="{{currentQuestion === examData.totalQuestions}}"
+        >
+          提交试卷
+        </button>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 底部悬浮菜单 -->
+<bottom-tabbar current-tab="{{2}}"></bottom-tabbar>
+
+<!-- 提交确认弹窗 -->
+<view class="submit-modal {{showSubmitModal ? 'show' : ''}}">
+  <view class="modal-content">
+    <view class="modal-header">
+      <text class="modal-title">确认提交</text>
+    </view>
+    <view class="modal-body">
+      <text class="modal-text">确认提交本次测试吗？提交后将无法修改答案。</text>
+      <view class="answer-stats">
+        <text class="stats-item">已完成：{{answeredCount}}/{{examData.totalQuestions}}题</text>
+        <text class="stats-item">未完成：{{unansweredCount}}题</text>
+      </view>
+    </view>
+    <view class="modal-actions">
+      <button class="modal-btn cancel-btn" bindtap="hideSubmitModal">取消</button>
+      <button class="modal-btn confirm-btn" bindtap="submitExam">确认提交</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,31 @@
+@import '../../styles/adaptive.less';
+
+page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.scrollarea {
+  flex: 1;
+  overflow-y: hidden;
+  .responsive-container();
+  padding-top: 0;
+}
+
+.log-item {
+  margin-top: 20rpx;
+  text-align: center;
+  
+  @media (max-width: 320px) {
+    margin-top: 15rpx;
+  }
+  
+  @media (min-width: 414px) {
+    margin-top: 25rpx;
+  }
+}
+
+.log-item:last-child {
+  padding-bottom: env(safe-area-inset-bottom);
+}

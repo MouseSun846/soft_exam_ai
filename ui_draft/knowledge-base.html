@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知识库管理 - AI软考管家</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#6B7280',
+                        success: '#10B981',
+                        warning: '#F59E0B',
+                        error: '#EF4444'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-sm border-b">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">AI</span>
+                    </div>
+                    <span class="text-lg font-semibold text-gray-900">AI软考管家</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-600 hover:text-primary transition-colors">首页</button>
+                    <button class="text-primary font-medium">知识库</button>
+                    <button class="text-gray-600 hover:text-primary transition-colors">测试</button>
+                    <div class="w-8 h-8 bg-gray-300 rounded-full"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-4 py-8">
+        <!-- 页面标题和上传按钮 -->
+        <div class="flex justify-between items-center mb-6">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">我的知识库</h1>
+                <p class="text-gray-600">管理您的复习资料文档</p>
+            </div>
+            <button class="bg-primary text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-600 transition-colors flex items-center">
+                <span class="mr-2">+</span> 上传文档
+            </button>
+        </div>
+
+        <!-- 搜索功能 -->
+        <div class="bg-white rounded-lg shadow-sm border p-4 mb-6">
+            <div class="flex items-center space-x-3">
+                <div class="flex-1 relative">
+                    <input 
+                        type="text" 
+                        id="searchInput"
+                        placeholder="搜索文档名称或内容关键词..."
+                        class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    >
+                    <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">🔍</span>
+                </div>
+                <button id="searchButton" class="bg-primary text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-600 transition-colors">
+                    搜索
+                </button>
+                <button id="clearSearch" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+                    清除
+                </button>
+            </div>
+            <div id="searchResults" class="mt-3 text-sm text-gray-600 hidden">
+                <span id="resultCount">0</span> 个文档匹配您的搜索条件
+            </div>
+        </div>
+
+        <!-- 上传区域 -->
+        <div class="bg-white rounded-lg border-2 border-dashed border-gray-300 p-8 text-center mb-8">
+            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span class="text-primary text-2xl">📄</span>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">上传复习资料</h3>
+            <p class="text-gray-600 mb-4">支持 .txt, .doc, .docx, .md, .pdf 格式</p>
+            <button class="bg-primary text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-600 transition-colors">
+                选择文件
+            </button>
+            <p class="text-sm text-gray-500 mt-2">可从微信聊天记录或手机本地选择</p>
+        </div>
+
+        <!-- 知识库列表 -->
+        <div class="bg-white rounded-lg shadow-sm border">
+            <div class="p-6 border-b">
+                <h3 class="text-lg font-semibold">文档列表</h3>
+            </div>
+            
+            <!-- 文档项 -->
+            <div class="divide-y">
+                <!-- 已就绪文档 -->
+                <div class="document-item p-4 flex items-center justify-between hover:bg-gray-50" data-name="软件工程基础.pdf" data-type="PDF" data-content="软件工程基础 开发流程 需求分析 设计模式">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                            <span class="text-success">📄</span>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-900">软件工程基础.pdf</h4>
+                            <div class="flex items-center space-x-4 text-sm text-gray-500">
+                                <span>PDF文档</span>
+                                <span>•</span>
+                                <span>2024-10-15 14:30</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">已就绪</span>
+                        <button class="text-red-500 hover:text-red-700 text-sm">删除</button>
+                    </div>
+                </div>
+
+                <!-- 解析中文档 -->
+                <div class="document-item p-4 flex items-center justify-between hover:bg-gray-50" data-name="网络技术.docx" data-type="Word" data-content="网络技术 TCP/IP 协议栈 路由器 交换机">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <span class="text-primary">📄</span>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-900">网络技术.docx</h4>
+                            <div class="flex items-center space-x-4 text-sm text-gray-500">
+                                <span>Word文档</span>
+                                <span>•</span>
+                                <span>2024-10-19 10:15</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">解析中</span>
+                        <div class="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                    </div>
+                </div>
+
+                <!-- 解析失败文档 -->
+                <div class="document-item p-4 flex items-center justify-between hover:bg-gray-50" data-name="数据库系统.md" data-type="Markdown" data-content="数据库系统 SQL 关系型数据库 NoSQL">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+                            <span class="text-error">📄</span>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-900">数据库系统.md</h4>
+                            <div class="flex items-center space-x-4 text-sm text-gray-500">
+                                <span>Markdown</span>
+                                <span>•</span>
+                                <span>2024-10-18 16:45</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">解析失败</span>
+                        <button class="text-red-500 hover:text-red-700 text-sm">删除</button>
+                    </div>
+                </div>
+
+                <!-- 更多文档示例 -->
+                <div class="document-item p-4 flex items-center justify-between hover:bg-gray-50" data-name="操作系统原理.txt" data-type="文本" data-content="操作系统原理 进程管理 内存管理 文件系统">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                            <span class="text-success">📄</span>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-900">操作系统原理.txt</h4>
+                            <div class="flex items-center space-x-4 text-sm text-gray-500">
+                                <span>文本文件</span>
+                                <span>•</span>
+                                <span>2024-10-12 09:20</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">已就绪</span>
+                        <button class="text-red-500 hover:text-red-700 text-sm">删除</button>
+                    </div>
+                </div>
+
+                <!-- 额外文档示例 -->
+                <div class="document-item p-4 flex items-center justify-between hover:bg-gray-50" data-name="数据结构与算法.pdf" data-type="PDF" data-content="数据结构 算法 链表 树 排序 查找">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                            <span class="text-success">📄</span>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-900">数据结构与算法.pdf</h4>
+                            <div class="flex items-center space-x-4 text-sm text-gray-500">
+                                <span>PDF文档</span>
+                                <span>•</span>
+                                <span>2024-10-10 08:45</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">已就绪</span>
+                        <button class="text-red-500 hover:text-red-700 text-sm">删除</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 状态说明 -->
+        <div class="mt-6 grid grid-cols-3 gap-4 text-sm">
+            <div class="flex items-center">
+                <span class="w-3 h-3 bg-green-500 rounded-full mr-2"></span>
+                <span class="text-gray-600">已就绪：文档已解析完毕，可用于AI功能</span>
+            </div>
+            <div class="flex items-center">
+                <span class="w-3 h-3 bg-blue-500 rounded-full mr-2"></span>
+                <span class="text-gray-600">解析中：后台正在处理文档</span>
+            </div>
+            <div class="flex items-center">
+                <span class="w-3 h-3 bg-red-500 rounded-full mr-2"></span>
+                <span class="text-gray-600">解析失败：文档处理出错</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 删除确认弹窗 -->
+    <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg p-6 max-w-sm mx-4">
+            <h3 class="text-lg font-semibold mb-4">确认删除</h3>
+            <p class="text-gray-600 mb-6">确认删除该文档吗？删除后将无法恢复。</p>
+            <div class="flex space-x-3">
+                <button class="flex-1 bg-gray-200 text-gray-800 py-2 rounded-lg font-medium hover:bg-gray-300 transition-colors">
+                    取消
+                </button>
+                <button class="flex-1 bg-red-500 text-white py-2 rounded-lg font-medium hover:bg-red-600 transition-colors">
+                    确认删除
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 搜索功能实现
+        function performSearch() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            const documentItems = document.querySelectorAll('.document-item');
+            let matchCount = 0;
+
+            documentItems.forEach(item => {
+                const name = item.getAttribute('data-name').toLowerCase();
+                const type = item.getAttribute('data-type').toLowerCase();
+                const content = item.getAttribute('data-content').toLowerCase();
+                
+                const isVisible = searchTerm === '' || 
+                    name.includes(searchTerm) || 
+                    type.includes(searchTerm) || 
+                    content.includes(searchTerm);
+                
+                item.style.display = isVisible ? 'flex' : 'none';
+                
+                if (isVisible) {
+                    matchCount++;
+                }
+            });
+
+            // 更新搜索结果统计
+            const resultsElement = document.getElementById('searchResults');
+            const countElement = document.getElementById('resultCount');
+            
+            if (searchTerm === '') {
+                resultsElement.classList.add('hidden');
+            } else {
+                resultsElement.classList.remove('hidden');
+                countElement.textContent = matchCount;
+            }
+        }
+
+        // 清除搜索
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            performSearch();
+        }
+
+        // 事件监听
+        document.getElementById('searchButton').addEventListener('click', performSearch);
+        document.getElementById('clearSearch').addEventListener('click', clearSearch);
+        
+        // 回车键搜索
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        // 实时搜索（可选，取消注释启用）
+        // document.getElementById('searchInput').addEventListener('input', performSearch);
+
+        // 简单的删除确认功能
+        document.querySelectorAll('button.text-red-500').forEach(button => {
+            button.addEventListener('click', function() {
+                document.getElementById('deleteModal').classList.remove('hidden');
+            });
+        });
+
+        document.querySelector('#deleteModal button.bg-gray-200').addEventListener('click', function() {
+            document.getElementById('deleteModal').classList.add('hidden');
+        });
+
+        document.querySelector('#deleteModal button.bg-red-500').addEventListener('click', function() {
+            document.getElementById('deleteModal').classList.add('hidden');
+            // 这里可以添加实际的删除逻辑
+        });
+    </script>
+</body>
+</html>

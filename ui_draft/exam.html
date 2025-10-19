@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模拟测试 - AI软考管家</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#6B7280',
+                        success: '#10B981',
+                        warning: '#F59E0B',
+                        error: '#EF4444'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-sm border-b">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">AI</span>
+                    </div>
+                    <span class="text-lg font-semibold text-gray-900">AI软考管家</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-600 hover:text-primary transition-colors">首页</button>
+                    <button class="text-gray-600 hover:text-primary transition-colors">知识库</button>
+                    <button class="text-gray-600 hover:text-primary transition-colors">智能复习</button>
+                    <button class="text-primary font-medium">模拟测试</button>
+                    <div class="w-8 h-8 bg-gray-300 rounded-full"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-4 py-8">
+        <!-- 页面标题 -->
+        <div class="mb-8">
+            <h1 class="text-2xl font-bold text-gray-900 mb-2">模拟测试</h1>
+            <p class="text-gray-600">基于AI生成的个性化测试题目</p>
+        </div>
+
+        <!-- 测试信息 -->
+        <div class="bg-white rounded-lg shadow-sm border p-6 mb-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h3 class="text-lg font-semibold">TCP/IP协议栈测试</h3>
+                    <p class="text-gray-600">共10题 • 预计用时15分钟</p>
+                </div>
+                <div class="text-right">
+                    <div class="text-2xl font-bold text-primary">1/10</div>
+                    <div class="text-sm text-gray-600">当前进度</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 题目区域 -->
+        <div class="bg-white rounded-lg shadow-sm border mb-6">
+            <!-- 题目头部 -->
+            <div class="p-6 border-b">
+                <div class="flex justify-between items-center">
+                    <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">填空题</span>
+                    <span class="text-sm text-gray-600">第1题</span>
+                </div>
+            </div>
+
+            <!-- 题目内容 -->
+            <div class="p-6">
+                <div class="mb-6">
+                    <h4 class="text-lg font-medium mb-4">TCP/IP协议栈的四层模型包括：应用层、传输层、网络层和______。</h4>
+                    
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <span class="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-sm mr-3">1</span>
+                            <input type="text" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" placeholder="请输入答案">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 导航按钮 -->
+                <div class="flex justify-between">
+                    <button class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors" disabled>
+                        上一题
+                    </button>
+                    <button class="px-6 py-2 bg-primary text-white rounded-lg font-medium hover:bg-blue-600 transition-colors">
+                        下一题
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 问答题示例 -->
+        <div class="bg-white rounded-lg shadow-sm border mb-6">
+            <div class="p-6 border-b">
+                <div class="flex justify-between items-center">
+                    <span class="px-3 py-1 bg-purple-100 text-purple-800 text-sm rounded-full">问答题</span>
+                    <span class="text-sm text-gray-600">第2题</span>
+                </div>
+            </div>
+
+            <div class="p-6">
+                <div class="mb-6">
+                    <h4 class="text-lg font-medium mb-4">请简述TCP三次握手的过程及其作用。</h4>
+                    
+                    <textarea 
+                        class="w-full h-32 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                        placeholder="请在此输入您的答案..."
+                    ></textarea>
+                </div>
+
+                <div class="flex justify-between">
+                    <button class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+                        上一题
+                    </button>
+                    <button class="px-6 py-2 bg-primary text-white rounded-lg font-medium hover:bg-blue-600 transition-colors">
+                        下一题
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 提交按钮 -->
+        <div class="text-center">
+            <button class="px-8 py-3 bg-red-500 text-white rounded-lg font-medium hover:bg-red-600 transition-colors">
+                提交试卷
+            </button>
+        </div>
+    </div>
+
+    <!-- 提交确认弹窗 -->
+    <div id="submitModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg p-6 max-w-sm mx-4">
+            <h3 class="text-lg font-semibold mb-4">确认提交</h3>
+            <p class="text-gray-600 mb-6">确认提交本次测试吗？提交后将无法修改答案。</p>
+            <div class="flex space-x-3">
+                <button class="flex-1 bg-gray-200 text-gray-800 py-2 rounded-lg font-medium hover:bg-gray-300 transition-colors">
+                    取消
+                </button>
+                <button class="flex-1 bg-red-500 text-white py-2 rounded-lg font-medium hover:bg-red-600 transition-colors">
+                    确认提交
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 简单的题目导航功能
+        let currentQuestion = 1;
+        const totalQuestions = 10;
+
+        function updateQuestionNavigation() {
+            const prevButton = document.querySelector('button:disabled');
+            const nextButton = document.querySelector('button.bg-primary');
+            
+            if (currentQuestion === 1) {
+                prevButton.disabled = true;
+            } else {
+                prevButton.disabled = false;
+            }
+            
+            if (currentQuestion === totalQuestions) {
+                nextButton.textContent = '提交试卷';
+                nextButton.classList.remove('bg-primary');
+                nextButton.classList.add('bg-red-500');
+            } else {
+                nextButton.textContent = '下一题';
+                nextButton.classList.remove('bg-red-500');
+                nextButton.classList.add('bg-primary');
+            }
+            
+            // 更新进度显示
+            document.querySelector('.text-2xl').textContent = `${currentQuestion}/${totalQuestions}`;
+        }
+
+        // 下一题按钮点击
+        document.querySelectorAll('button.bg-primary').forEach(button => {
+            button.addEventListener('click', function() {
+                if (currentQuestion < totalQuestions) {
+                    currentQuestion++;
+                    updateQuestionNavigation();
+                } else {
+                    document.getElementById('submitModal').classList.remove('hidden');
+                }
+            });
+        });
+
+        // 上一题按钮点击
+        document.querySelectorAll('button.bg-gray-200').forEach(button => {
+            button.addEventListener('click', function() {
+                if (currentQuestion > 1) {
+                    currentQuestion--;
+                    updateQuestionNavigation();
+                }
+            });
+        });
+
+        // 提交确认
+        document.querySelector('#submitModal button.bg-red-500').addEventListener('click', function() {
+            // 跳转到结果页面
+            window.location.href = 'exam-result.html';
+        });
+
+        document.querySelector('#submitModal button.bg-gray-200').addEventListener('click', function() {
+            document.getElementById('submitModal').classList.add('hidden');
+        });
+    </script>
+</body>
+</html>

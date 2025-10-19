@@ -1,0 +1,53 @@
+// 适配工具函数
+var adaptive = {
+  // 获取屏幕宽度
+  getScreenWidth: function() {
+    return wx.getSystemInfoSync().screenWidth;
+  },
+  
+  // 获取屏幕高度
+  getScreenHeight: function() {
+    return wx.getSystemInfoSync().screenHeight;
+  },
+  
+  // 获取设备像素比
+  getPixelRatio: function() {
+    return wx.getSystemInfoSync().pixelRatio;
+  },
+  
+  // 根据屏幕宽度计算适配尺寸
+  getAdaptiveSize: function(baseSize) {
+    var screenWidth = this.getScreenWidth();
+    var baseWidth = 375; // 设计稿基准宽度
+    return Math.round(baseSize * screenWidth / baseWidth);
+  },
+  
+  // 判断是否为小屏幕设备
+  isSmallScreen: function() {
+    return this.getScreenWidth() <= 320;
+  },
+  
+  // 判断是否为中等屏幕设备
+  isMediumScreen: function() {
+    var width = this.getScreenWidth();
+    return width > 320 && width <= 414;
+  },
+  
+  // 判断是否为大屏幕设备
+  isLargeScreen: function() {
+    return this.getScreenWidth() > 414;
+  },
+  
+  // 获取安全区域信息
+  getSafeArea: function() {
+    var systemInfo = wx.getSystemInfoSync();
+    return {
+      top: systemInfo.safeArea.top,
+      bottom: systemInfo.safeArea.bottom,
+      left: systemInfo.safeArea.left,
+      right: systemInfo.safeArea.right
+    };
+  }
+};
+
+module.exports = adaptive;

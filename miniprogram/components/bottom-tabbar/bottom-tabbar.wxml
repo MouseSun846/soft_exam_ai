@@ -1,0 +1,40 @@
+<!-- bottom-tabbar.wxml -->
+<view class="bottom-tabbar">
+  <view class="tabbar-container">
+    <view 
+      class="tab-item {{currentTab === 0 ? 'active' : ''}}" 
+      bindtap="switchTab" 
+      data-index="0"
+    >
+      <view class="tab-icon">🏠</view>
+      <text class="tab-text">首页</text>
+    </view>
+    
+    <view 
+      class="tab-item {{currentTab === 1 ? 'active' : ''}}" 
+      bindtap="switchTab" 
+      data-index="1"
+    >
+      <view class="tab-icon">📚</view>
+      <text class="tab-text">知识库</text>
+    </view>
+    
+    <view 
+      class="tab-item {{currentTab === 2 ? 'active' : ''}}" 
+      bindtap="switchTab" 
+      data-index="2"
+    >
+      <view class="tab-icon">🧠</view>
+      <text class="tab-text">智能复习</text>
+    </view>
+    
+    <view 
+      class="tab-item {{currentTab === 3 ? 'active' : ''}}" 
+      bindtap="switchTab" 
+      data-index="3"
+    >
+      <view class="tab-icon">👤</view>
+      <text class="tab-text">个人中心</text>
+    </view>
+  </view>
+</view>

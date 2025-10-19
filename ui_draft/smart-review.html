@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能复习 - AI软考管家</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#6B7280',
+                        success: '#10B981',
+                        warning: '#F59E0B',
+                        error: '#EF4444'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-sm border-b">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">AI</span>
+                    </div>
+                    <span class="text-lg font-semibold text-gray-900">AI软考管家</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-600 hover:text-primary transition-colors">首页</button>
+                    <button class="text-gray-600 hover:text-primary transition-colors">知识库</button>
+                    <button class="text-primary font-medium">智能复习</button>
+                    <div class="w-8 h-8 bg-gray-300 rounded-full"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-4 py-8">
+        <!-- 页面标题 -->
+        <div class="mb-8">
+            <h1 class="text-2xl font-bold text-gray-900 mb-2">智能复习</h1>
+            <p class="text-gray-600">基于您的知识库，AI为您生成个性化复习要点</p>
+        </div>
+
+        <!-- 复习主题输入 -->
+        <div class="bg-white rounded-lg shadow-sm border p-6 mb-6">
+            <h3 class="text-lg font-semibold mb-4">输入复习主题</h3>
+            <div class="space-y-4">
+                <input 
+                    type="text" 
+                    placeholder="请输入您想复习的知识点，如 TCP/IP、软件工程、数据库原理等"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                >
+                <button class="bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-600 transition-colors w-full">
+                    生成复习要点
+                </button>
+            </div>
+        </div>
+
+        <!-- AI生成内容区域 -->
+        <div class="bg-white rounded-lg shadow-sm border">
+            <div class="p-6 border-b">
+                <h3 class="text-lg font-semibold">AI生成的复习要点</h3>
+                <p class="text-sm text-gray-600 mt-1">基于您的知识库内容生成</p>
+            </div>
+            
+            <div class="p-6">
+                <!-- 加载状态 -->
+                <div id="loadingState" class="hidden">
+                    <div class="flex items-center justify-center py-8">
+                        <div class="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin mr-3"></div>
+                        <span class="text-gray-600">AI正在思考中...</span>
+                    </div>
+                </div>
+
+                <!-- 内容展示 -->
+                <div id="contentArea" class="prose max-w-none">
+                    <div class="bg-blue-50 border-l-4 border-primary p-4 mb-6">
+                        <p class="text-blue-800">请在上方输入复习主题，点击"生成复习要点"按钮开始使用AI智能复习功能。</p>
+                    </div>
+
+                    <!-- 示例内容 -->
+                    <div class="hidden" id="exampleContent">
+                        <h3>TCP/IP协议栈复习要点</h3>
+                        
+                        <h4>一、TCP/IP四层模型</h4>
+                        <ul>
+                            <li><strong>应用层</strong>：HTTP、FTP、SMTP等协议</li>
+                            <li><strong>传输层</strong>：TCP（可靠传输）、UDP（无连接传输）</li>
+                            <li><strong>网络层</strong>：IP协议、路由选择、IP地址分配</li>
+                            <li><strong>网络接口层</strong>：物理传输、数据链路控制</li>
+                        </ul>
+
+                        <h4>二、TCP三次握手</h4>
+                        <ol>
+                            <li>客户端发送SYN包到服务器</li>
+                            <li>服务器回应SYN-ACK包</li>
+                            <li>客户端发送ACK包确认连接</li>
+                        </ol>
+
+                        <h4>三、IP地址分类</h4>
+                        <table class="w-full border-collapse border border-gray-300">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="border border-gray-300 p-2">类别</th>
+                                    <th class="border border-gray-300 p-2">地址范围</th>
+                                    <th class="border border-gray-300 p-2">网络位数</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border border-gray-300 p-2">A类</td>
+                                    <td class="border border-gray-300 p-2">1.0.0.0 - 126.255.255.255</td>
+                                    <td class="border border-gray-300 p-2">8位</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-gray-300 p-2">B类</td>
+                                    <td class="border border-gray-300 p-2">128.0.0.0 - 191.255.255.255</td>
+                                    <td class="border border-gray-300 p-2">16位</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>四、重要概念</h4>
+                        <p><strong>子网掩码</strong>：用于划分网络和主机部分</p>
+                        <p><strong>默认网关</strong>：本地网络的出口路由器</p>
+                        <p><strong>DNS</strong>：域名解析系统，将域名转换为IP地址</p>
+                    </div>
+                </div>
+
+                <!-- 操作按钮 -->
+                <div class="flex space-x-3 mt-6">
+                    <button class="bg-green-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-600 transition-colors flex items-center">
+                        <span class="mr-2">📋</span> 复制内容
+                    </button>
+                    <button class="bg-primary text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-600 transition-colors flex items-center">
+                        <span class="mr-2">📝</span> 开始模拟测试
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 使用提示 -->
+        <div class="mt-6 bg-yellow-50 border-l-4 border-warning p-4">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <span class="text-warning text-lg">💡</span>
+                </div>
+                <div class="ml-3">
+                    <h4 class="text-sm font-medium text-yellow-800">使用提示</h4>
+                    <div class="mt-1 text-sm text-yellow-700">
+                        <p>• 输入具体的知识点名称可以获得更精准的复习要点</p>
+                        <p>• 生成内容后可以复制到其他应用或直接开始模拟测试</p>
+                        <p>• 确保您的知识库中有相关文档以获得最佳效果</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 模拟AI生成过程
+        document.querySelector('button.bg-primary').addEventListener('click', function() {
+            const input = document.querySelector('input[type="text"]');
+            if (!input.value.trim()) {
+                alert('请输入复习主题');
+                return;
+            }
+
+            // 显示加载状态
+            document.getElementById('loadingState').classList.remove('hidden');
+            document.getElementById('contentArea').classList.add('hidden');
+
+            // 模拟AI处理时间
+            setTimeout(() => {
+                document.getElementById('loadingState').classList.add('hidden');
+                document.getElementById('contentArea').classList.remove('hidden');
+                
+                // 显示示例内容
+                const exampleContent = document.getElementById('exampleContent');
+                exampleContent.classList.remove('hidden');
+                
+                // 更新标题
+                const title = document.querySelector('#contentArea h3');
+                if (title) {
+                    title.textContent = `${input.value}复习要点`;
+                }
+            }, 2000);
+        });
+
+        // 复制功能
+        document.querySelector('button.bg-green-500').addEventListener('click', function() {
+            const content = document.getElementById('exampleContent').innerText;
+            navigator.clipboard.writeText(content).then(() => {
+                alert('内容已复制到剪贴板');
+            });
+        });
+    </script>
+</body>
+</html>

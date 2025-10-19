@@ -1,0 +1,1 @@
+{"title":"UI适配优化","features":["响应式布局适配","多屏幕尺寸支持","组件自适应优化","安全区域适配"],"tech":{"Web":{"arch":"react","component":"shadcn"},"iOS":"微信小程序","Android":"微信小程序"},"design":"移动优先的响应式设计，支持320px-768px屏幕尺寸范围，包含超小屏幕、小屏幕、中等屏幕和大屏幕的适配方案","plan":{"step1":"done","step2":"done","step3":"done","step4":"done"}}

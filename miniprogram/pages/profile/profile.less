@@ -1,0 +1,688 @@
+/* profile.wxss */
+@import '../../styles/adaptive.less';
+
+.container {
+  .responsive-container();
+  background-color: #f8fafc;
+  min-height: 100vh;
+  padding-bottom: 160rpx; /* 为底部悬浮菜单留出空间 */
+}
+
+/* 用户信息头部 */
+.header-section {
+  margin-bottom: 30rpx;
+}
+
+.user-card {
+  background: white;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.user-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  margin-right: 30rpx;
+  background-color: #e5e7eb;
+}
+
+.user-details {
+  flex: 1;
+}
+
+.user-name {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #1f2937;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.user-level {
+  font-size: 26rpx;
+  color: #6b7280;
+}
+
+.progress-section {
+  text-align: center;
+}
+
+.progress-circle {
+  position: relative;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background: conic-gradient(#3b82f6 0deg, #e5e7eb 0deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10rpx;
+}
+
+.progress-ring {
+  position: absolute;
+  width: 80rpx;
+  height: 80rpx;
+  background: white;
+  border-radius: 50%;
+}
+
+.progress-text {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #3b82f6;
+  z-index: 1;
+}
+
+.progress-label {
+  font-size: 22rpx;
+  color: #6b7280;
+}
+
+/* 个人中心功能菜单 */
+.menu-section {
+  margin-bottom: 30rpx;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+}
+
+.menu-item {
+  background: white;
+  border-radius: 20rpx;
+  padding: 30rpx 20rpx;
+  text-align: center;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.menu-item:active {
+  transform: scale(0.98);
+}
+
+.menu-icon {
+  font-size: 60rpx;
+  margin-bottom: 15rpx;
+  display: block;
+}
+
+.menu-title {
+  font-size: 28rpx;
+  color: #1f2937;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 5rpx;
+}
+
+.menu-desc {
+  font-size: 22rpx;
+  color: #6b7280;
+}
+
+/* 学习统计 */
+.stats-section {
+  margin-bottom: 30rpx;
+}
+
+.stats-card {
+  background: white;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.section-header {
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 20rpx;
+  background: #f9fafb;
+  border-radius: 15rpx;
+}
+
+.stat-value {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #3b82f6;
+  display: block;
+  margin-bottom: 5rpx;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #6b7280;
+}
+
+/* 联系方式 */
+.contact-section {
+  margin-bottom: 30rpx;
+}
+
+.contact-card {
+  background: white;
+  border-radius: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.contact-content {
+  padding: 0;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  padding: 25rpx;
+  border-bottom: 1rpx solid #f3f4f6;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.contact-item:last-child {
+  border-bottom: none;
+}
+
+.contact-item:active {
+  background-color: #f9fafb;
+}
+
+.contact-icon {
+  font-size: 40rpx;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.contact-info {
+  flex: 1;
+}
+
+.contact-title {
+  font-size: 28rpx;
+  color: #1f2937;
+  display: block;
+  margin-bottom: 5rpx;
+}
+
+.contact-desc {
+  font-size: 24rpx;
+  color: #6b7280;
+  display: block;
+}
+
+.contact-arrow {
+  font-size: 36rpx;
+  color: #cbd5e1;
+  font-weight: bold;
+}
+
+/* 联系方式弹窗 */
+.contact-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 9999;
+}
+
+.contact-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: #ffffff;
+  border-radius: 24rpx 24rpx 0 0;
+  width: 100%;
+  max-width: 750rpx;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.contact-modal.show .modal-content {
+  transform: translateY(0);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32rpx;
+  border-bottom: 1rpx solid #f1f5f9;
+}
+
+.modal-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.modal-close {
+  font-size: 48rpx;
+  color: #64748b;
+  cursor: pointer;
+  padding: 16rpx;
+  margin: -16rpx;
+}
+
+.qr-code-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48rpx 32rpx;
+}
+
+.qr-code-image {
+  width: 400rpx;
+  height: 400rpx;
+  margin-bottom: 32rpx;
+  border: 1rpx solid #e2e8f0;
+  border-radius: 16rpx;
+}
+
+.qr-code-tip {
+  font-size: 28rpx;
+  color: #64748b;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.modal-footer {
+  padding: 24rpx 32rpx;
+  border-top: 1rpx solid #f1f5f9;
+  text-align: center;
+}
+
+.contact-info-text {
+  font-size: 26rpx;
+  color: #94a3b8;
+}
+
+
+
+/* 响应式调整 */
+@media (max-width: 375px) {
+  .container {
+    padding: 15rpx;
+    padding-top: 100rpx;
+  }
+  
+  .user-card {
+    padding: 20rpx;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .user-info {
+    margin-bottom: 20rpx;
+    justify-content: center;
+  }
+  
+  .user-avatar {
+    width: 100rpx;
+    height: 100rpx;
+    margin-right: 20rpx;
+  }
+  
+  .user-name {
+    font-size: 32rpx;
+  }
+  
+  .user-level {
+    font-size: 24rpx;
+  }
+  
+  .progress-circle {
+    width: 80rpx;
+    height: 80rpx;
+  }
+  
+  .progress-ring {
+    width: 64rpx;
+    height: 64rpx;
+  }
+  
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15rpx;
+  }
+  
+  .menu-item {
+    padding: 20rpx 15rpx;
+  }
+  
+  .menu-icon {
+    font-size: 50rpx;
+  }
+  
+  .menu-title {
+    font-size: 26rpx;
+  }
+  
+  .menu-desc {
+    font-size: 20rpx;
+  }
+  
+  .stats-card {
+    padding: 20rpx;
+  }
+  
+  .stat-item {
+    padding: 15rpx;
+  }
+  
+  .stat-value {
+    font-size: 28rpx;
+  }
+  
+  .stat-label {
+    font-size: 22rpx;
+  }
+  
+  .contact-item {
+    padding: 20rpx;
+  }
+  
+  .contact-icon {
+    font-size: 36rpx;
+    margin-right: 15rpx;
+  }
+  
+  .contact-title {
+    font-size: 26rpx;
+  }
+  
+  .contact-desc {
+    font-size: 22rpx;
+  }
+  
+  .qr-code-image {
+    width: 300rpx;
+    height: 300rpx;
+  }
+  
+  .qr-code-tip {
+    font-size: 24rpx;
+  }
+}
+
+/* 超小屏幕适配 */
+@media (max-width: 320px) {
+  .container {
+    padding: 10rpx;
+    padding-top: 90rpx;
+  }
+  
+  .user-card {
+    padding: 20rpx;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .user-info {
+    margin-bottom: 20rpx;
+    justify-content: center;
+  }
+  
+  .user-avatar {
+    width: 100rpx;
+    height: 100rpx;
+    margin-right: 20rpx;
+  }
+  
+  .user-name {
+    font-size: 32rpx;
+  }
+  
+  .user-level {
+    font-size: 24rpx;
+  }
+  
+  .progress-circle {
+    width: 80rpx;
+    height: 80rpx;
+  }
+  
+  .progress-ring {
+    width: 64rpx;
+    height: 64rpx;
+  }
+  
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15rpx;
+  }
+  
+  .menu-item {
+    padding: 20rpx 15rpx;
+  }
+  
+  .menu-icon {
+    font-size: 50rpx;
+  }
+  
+  .menu-title {
+    font-size: 26rpx;
+  }
+  
+  .menu-desc {
+    font-size: 20rpx;
+  }
+  
+  .stats-card {
+    padding: 20rpx;
+  }
+  
+  .stat-item {
+    padding: 15rpx;
+  }
+  
+  .stat-value {
+    font-size: 28rpx;
+  }
+  
+  .stat-label {
+    font-size: 22rpx;
+  }
+  
+  .contact-item {
+    padding: 20rpx;
+  }
+  
+  .contact-icon {
+    font-size: 36rpx;
+    margin-right: 15rpx;
+  }
+  
+  .contact-title {
+    font-size: 26rpx;
+  }
+  
+  .contact-desc {
+    font-size: 22rpx;
+  }
+  
+  .qr-code-image {
+    width: 300rpx;
+    height: 300rpx;
+  }
+  
+  .qr-code-tip {
+    font-size: 24rpx;
+  }
+  
+  .activity-item {
+    padding: 20rpx;
+  }
+  
+  .activity-icon {
+    font-size: 36rpx;
+    margin-right: 15rpx;
+  }
+  
+  .activity-title {
+    font-size: 26rpx;
+  }
+  
+  .activity-desc {
+    font-size: 22rpx;
+  }
+  
+  .activity-time {
+    font-size: 20rpx;
+  }
+}
+
+@media (min-width: 414px) {
+  .container {
+    padding: 25rpx;
+    padding-top: 130rpx;
+  }
+  
+  .user-card {
+    padding: 40rpx;
+  }
+  
+  .user-avatar {
+    width: 140rpx;
+    height: 140rpx;
+    margin-right: 40rpx;
+  }
+  
+  .user-name {
+    font-size: 40rpx;
+  }
+  
+  .user-level {
+    font-size: 28rpx;
+  }
+  
+  .progress-circle {
+    width: 120rpx;
+    height: 120rpx;
+  }
+  
+  .progress-ring {
+    width: 96rpx;
+    height: 96rpx;
+  }
+  
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25rpx;
+  }
+  
+  .menu-item {
+    padding: 40rpx 25rpx;
+  }
+  
+  .menu-icon {
+    font-size: 70rpx;
+  }
+  
+  .menu-title {
+    font-size: 32rpx;
+  }
+  
+  .menu-desc {
+    font-size: 24rpx;
+  }
+  
+  .stats-card {
+    padding: 40rpx;
+  }
+  
+  .stat-item {
+    padding: 25rpx;
+  }
+  
+  .stat-value {
+    font-size: 36rpx;
+  }
+  
+  .stat-label {
+    font-size: 26rpx;
+  }
+  
+  .contact-item {
+    padding: 30rpx;
+  }
+  
+  .contact-icon {
+    font-size: 44rpx;
+    margin-right: 25rpx;
+  }
+  
+  .contact-title {
+    font-size: 30rpx;
+  }
+  
+  .contact-desc {
+    font-size: 26rpx;
+  }
+  
+  .qr-code-image {
+    width: 450rpx;
+    height: 450rpx;
+  }
+  
+  .qr-code-tip {
+    font-size: 30rpx;
+  }
+  
+  .activity-item {
+    padding: 30rpx;
+  }
+  
+  .activity-icon {
+    font-size: 44rpx;
+    margin-right: 25rpx;
+  }
+  
+  .activity-title {
+    font-size: 30rpx;
+  }
+  
+  .activity-desc {
+    font-size: 26rpx;
+  }
+  
+  .activity-time {
+    font-size: 24rpx;
+  }
+}

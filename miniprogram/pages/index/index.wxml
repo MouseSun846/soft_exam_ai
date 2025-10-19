@@ -1,0 +1,112 @@
+<!--index.wxml-->
+
+<!-- 页面头 -->
+<view class="page-header">
+  <text class="page-header-title">首页</text>
+</view>
+<view class="page-header-placeholder"></view>
+
+<view class="container">
+  <!-- 欢迎区域 -->
+  <view class="welcome-section">
+    <view class="welcome-card">
+      <text class="welcome-title">欢迎使用软考AI助手</text>
+      <text class="welcome-subtitle">智能学习，高效备考</text>
+    </view>
+  </view>
+
+  <!-- 快速功能入口 -->
+  <view class="quick-actions-section">
+    <view class="section-title">
+      <text class="title-text">快速开始</text>
+      <text class="title-desc">选择学习方式</text>
+    </view>
+    
+    <view class="action-grid">
+      <view class="action-item" bindtap="navigateToKnowledgeBase">
+        <view class="action-icon knowledge">📚</view>
+        <text class="action-label">知识库</text>
+        <text class="action-desc">管理学习资料</text>
+      </view>
+      
+      <view class="action-item" bindtap="navigateToSmartReview">
+        <view class="action-icon review">🧠</view>
+        <text class="action-label">智能复习</text>
+        <text class="action-desc">AI生成要点</text>
+      </view>
+      
+      <view class="action-item" bindtap="navigateToExam">
+        <view class="action-icon exam">📝</view>
+        <text class="action-label">模拟测试</text>
+        <text class="action-desc">检验学习成果</text>
+      </view>
+      
+      <view class="action-item" bindtap="navigateToExamResult">
+        <view class="action-icon result">📊</view>
+        <text class="action-label">测试结果</text>
+        <text class="action-desc">查看分析报告</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 今日任务 -->
+  <view class="tasks-section">
+    <view class="section-title">
+      <text class="title-text">今日任务</text>
+      <text class="title-desc">{{completedTasksCount}}/{{todayTasks.length}} 已完成</text>
+    </view>
+    
+    <view class="tasks-list">
+      <block wx:for="{{todayTasks}}" wx:key="id">
+        <view class="task-item {{item.completed ? 'completed' : ''}}">
+          <view class="task-checkbox" bindtap="completeTask" data-id="{{item.id}}">
+            <text class="checkbox-icon">{{item.completed ? '✓' : ''}}</text>
+          </view>
+          <view class="task-content">
+            <view class="task-info">
+              <text class="task-title">{{item.title}}</text>
+              <text class="task-desc">{{item.description}}</text>
+            </view>
+            <view class="task-meta">
+              <view class="task-priority {{item.priority}}">
+                {{item.priority === 'high' ? '高' : item.priority === 'medium' ? '中' : '低'}}优先级
+              </view>
+              <text class="task-time">预计{{item.estimatedTime}}分钟</text>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 最近学习活动 -->
+  <view class="activities-section">
+    <view class="section-title">
+      <text class="title-text">最近学习</text>
+      <text class="title-desc">学习记录</text>
+    </view>
+    
+    <view class="activities-list">
+      <block wx:for="{{recentActivities}}" wx:key="id">
+        <view class="activity-item" bindtap="viewActivityDetail" data-id="{{item.id}}">
+          <text class="activity-icon">{{item.icon}}</text>
+          <view class="activity-content">
+            <text class="activity-title">{{item.title}}</text>
+            <text class="activity-desc">{{item.description}}</text>
+            <text class="activity-time">{{formatActivityTime(item.timestamp)}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 刷新按钮 -->
+  <view class="refresh-section">
+    <button class="refresh-btn" bindtap="refreshData" disabled="{{loading}}">
+      <text class="btn-text">{{loading ? '刷新中...' : '刷新数据'}}</text>
+    </button>
+  </view>
+</view>
+
+<!-- 底部悬浮菜单 -->
+<bottom-tabbar current-tab="{{0}}"></bottom-tabbar>

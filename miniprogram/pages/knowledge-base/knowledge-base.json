@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "知识库管理",
+  "usingComponents": {
+    "bottom-tabbar": "/components/bottom-tabbar/bottom-tabbar"
+  }
+}

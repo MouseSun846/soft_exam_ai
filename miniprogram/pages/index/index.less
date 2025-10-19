@@ -1,0 +1,412 @@
+/* index.wxss */
+@import '../../styles/adaptive.less';
+
+.container {
+  .responsive-container();
+  background-color: #f8fafc;
+  min-height: 100vh;
+  padding-bottom: 160rpx; /* 为底部悬浮菜单留出空间 */
+}
+
+/* 欢迎区域 */
+.welcome-section {
+  margin-bottom: 30rpx;
+}
+
+.welcome-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20rpx;
+  padding: 50rpx 30rpx;
+  text-align: center;
+  color: white;
+  box-shadow: 0 4rpx 20rpx rgba(102, 126, 234, 0.3);
+}
+
+.welcome-title {
+  font-size: 40rpx;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 15rpx;
+}
+
+.welcome-subtitle {
+  font-size: 28rpx;
+  opacity: 0.9;
+}
+
+/* 快速功能入口 */
+.quick-actions-section {
+  margin-bottom: 30rpx;
+}
+
+.section-title {
+  margin-bottom: 20rpx;
+}
+
+.title-text {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1f2937;
+  display: block;
+  margin-bottom: 5rpx;
+}
+
+.title-desc {
+  font-size: 26rpx;
+  color: #6b7280;
+}
+
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 20rpx;
+}
+
+.action-item {
+  background: white;
+  border-radius: 20rpx;
+  padding: 30rpx 20rpx;
+  text-align: center;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.action-item:active {
+  transform: scale(0.98);
+}
+
+.action-icon {
+  font-size: 60rpx;
+  margin-bottom: 15rpx;
+  display: block;
+}
+
+.action-label {
+  font-size: 28rpx;
+  color: #1f2937;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 5rpx;
+}
+
+.action-desc {
+  font-size: 22rpx;
+  color: #6b7280;
+}
+
+/* 今日任务 */
+.tasks-section {
+  margin-bottom: 30rpx;
+}
+
+.tasks-list {
+  background: white;
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  padding: 25rpx;
+  border-bottom: 1rpx solid #f3f4f6;
+}
+
+.task-item:last-child {
+  border-bottom: none;
+}
+
+.task-item.completed {
+  opacity: 0.6;
+}
+
+.task-checkbox {
+  width: 40rpx;
+  height: 40rpx;
+  border: 2rpx solid #d1d5db;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.task-item.completed .task-checkbox {
+  background: #10b981;
+  border-color: #10b981;
+}
+
+.checkbox-icon {
+  color: white;
+  font-size: 24rpx;
+  font-weight: bold;
+}
+
+.task-content {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.task-info {
+  flex: 1;
+}
+
+.task-title {
+  font-size: 28rpx;
+  color: #1f2937;
+  display: block;
+  margin-bottom: 5rpx;
+}
+
+.task-desc {
+  font-size: 24rpx;
+  color: #6b7280;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.task-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5rpx;
+  margin-left: 20rpx;
+}
+
+.task-priority {
+  font-size: 22rpx;
+  padding: 8rpx 16rpx;
+  border-radius: 8rpx;
+  font-weight: 500;
+  display: inline-block;
+  line-height: 1.6;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.task-priority.high {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.task-priority.medium {
+  background: #fef7cd;
+  color: #92400e;
+}
+
+.task-priority.low {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.task-time {
+  font-size: 22rpx;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 最近学习活动 */
+.activities-section {
+  margin-bottom: 30rpx;
+}
+
+.activities-list {
+  background: white;
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  padding: 25rpx;
+  border-bottom: 1rpx solid #f3f4f6;
+  transition: background-color 0.2s ease;
+}
+
+.activity-item:last-child {
+  border-bottom: none;
+}
+
+.activity-item:active {
+  background-color: #f9fafb;
+}
+
+.activity-icon {
+  font-size: 40rpx;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.activity-content {
+  flex: 1;
+}
+
+.activity-title {
+  font-size: 28rpx;
+  color: #1f2937;
+  display: block;
+  margin-bottom: 5rpx;
+}
+
+.activity-desc {
+  font-size: 24rpx;
+  color: #6b7280;
+  display: block;
+  margin-bottom: 5rpx;
+}
+
+.activity-time {
+  font-size: 22rpx;
+  color: #9ca3af;
+}
+
+/* 刷新按钮 */
+.refresh-section {
+  margin-bottom: 30rpx;
+}
+
+.refresh-btn {
+  width: 100%;
+  height: 80rpx;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 15rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+.refresh-btn:disabled {
+  background: #9ca3af;
+  opacity: 0.7;
+}
+
+.btn-text {
+  color: white;
+}
+
+/* 响应式调整 */
+@media (max-width: 375px) {
+  .container {
+    padding: 15rpx;
+    padding-top: 100rpx;
+  }
+  
+  .action-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+  
+  .welcome-card {
+    padding: 40rpx 25rpx;
+  }
+  
+  .welcome-title {
+    font-size: 36rpx;
+  }
+  
+  .welcome-subtitle {
+    font-size: 26rpx;
+  }
+}
+
+/* 超小屏幕适配 */
+@media (max-width: 320px) {
+  .container {
+    padding: 10rpx;
+    padding-top: 90rpx;
+  }
+  
+  .welcome-card {
+    padding: 30rpx 20rpx;
+  }
+  
+  .welcome-title {
+    font-size: 32rpx;
+  }
+  
+  .welcome-subtitle {
+    font-size: 24rpx;
+  }
+  
+  .action-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 15rpx;
+  }
+  
+  .action-item {
+    padding: 20rpx 15rpx;
+  }
+  
+  .action-icon {
+    font-size: 50rpx;
+  }
+  
+  .action-label {
+    font-size: 26rpx;
+  }
+  
+  .action-desc {
+    font-size: 20rpx;
+  }
+  
+  .task-item {
+    padding: 20rpx;
+  }
+  
+  .activity-item {
+    padding: 20rpx;
+  }
+}
+
+/* 大屏幕适配 */
+@media (min-width: 414px) {
+  .container {
+    padding: 25rpx;
+    padding-top: 130rpx;
+  }
+  
+  .welcome-card {
+    padding: 60rpx 40rpx;
+  }
+  
+  .welcome-title {
+    font-size: 44rpx;
+  }
+  
+  .welcome-subtitle {
+    font-size: 30rpx;
+  }
+  
+  .action-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 25rpx;
+  }
+  
+  .action-item {
+    padding: 40rpx 25rpx;
+  }
+  
+  .action-icon {
+    font-size: 70rpx;
+  }
+  
+  .action-label {
+    font-size: 32rpx;
+  }
+  
+  .action-desc {
+    font-size: 24rpx;
+  }
+}

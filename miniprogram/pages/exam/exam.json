@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "模拟测试",
+  "usingComponents": {
+    "bottom-tabbar": "/components/bottom-tabbar/bottom-tabbar"
+  }
+}

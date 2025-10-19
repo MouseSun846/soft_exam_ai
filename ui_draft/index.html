@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI软考管家 - 产品原型</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#6B7280',
+                        success: '#10B981',
+                        warning: '#F59E0B',
+                        error: '#EF4444'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-sm border-b">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">AI</span>
+                    </div>
+                    <span class="text-lg font-semibold text-gray-900">AI软考管家</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-600 hover:text-primary transition-colors">首页</button>
+                    <button class="text-gray-600 hover:text-primary transition-colors">知识库</button>
+                    <button class="text-gray-600 hover:text-primary transition-colors">测试</button>
+                    <div class="w-8 h-8 bg-gray-300 rounded-full"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-6xl mx-auto px-4 py-8">
+        <!-- 页面标题 -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">AI软考管家产品原型</h1>
+            <p class="text-gray-600">基于微信小程序的智能复习工具</p>
+        </div>
+
+        <!-- 功能模块展示 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <!-- 用户中心 -->
+            <div class="bg-white rounded-lg shadow-sm border p-6">
+                <div class="flex items-center mb-4">
+                    <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                        <span class="text-primary text-lg">👤</span>
+                    </div>
+                    <h3 class="text-lg font-semibold">用户中心</h3>
+                </div>
+                <ul class="space-y-2 text-sm text-gray-600">
+                    <li>• 微信授权登录</li>
+                    <li>• 个人中心页面</li>
+                    <li>• 用户信息展示</li>
+                    <li>• 功能入口管理</li>
+                </ul>
+            </div>
+
+            <!-- 知识库管理 -->
+            <div class="bg-white rounded-lg shadow-sm border p-6">
+                <div class="flex items-center mb-4">
+                    <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                        <span class="text-success text-lg">📚</span>
+                    </div>
+                    <h3 class="text-lg font-semibold">知识库管理</h3>
+                </div>
+                <ul class="space-y-2 text-sm text-gray-600">
+                    <li>• 文档上传功能</li>
+                    <li>• 多格式支持</li>
+                    <li>• 知识库列表</li>
+                    <li>• 文档状态管理</li>
+                </ul>
+            </div>
+
+            <!-- 智能复习 -->
+            <div class="bg-white rounded-lg shadow-sm border p-6">
+                <div class="flex items-center mb-4">
+                    <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
+                        <span class="text-purple-600 text-lg">🧠</span>
+                    </div>
+                    <h3 class="text-lg font-semibold">智能复习</h3>
+                </div>
+                <ul class="space-y-2 text-sm text-gray-600">
+                    <li>• AI要点生成</li>
+                    <li>• 主题输入</li>
+                    <li>• 结构化展示</li>
+                    <li>• 内容复制</li>
+                </ul>
+            </div>
+
+            <!-- 模拟测试 -->
+            <div class="bg-white rounded-lg shadow-sm border p-6">
+                <div class="flex items-center mb-4">
+                    <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center mr-3">
+                        <span class="text-warning text-lg">📝</span>
+                    </div>
+                    <h3 class="text-lg font-semibold">模拟测试</h3>
+                </div>
+                <ul class="space-y-2 text-sm text-gray-600">
+                    <li>• 试卷生成</li>
+                    <li>• 答题界面</li>
+                    <li>• 题目切换</li>
+                    <li>• 试卷提交</li>
+                </ul>
+            </div>
+
+            <!-- 学习追踪 -->
+            <div class="bg-white rounded-lg shadow-sm border p-6">
+                <div class="flex items-center mb-4">
+                    <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                        <span class="text-error text-lg">📊</span>
+                    </div>
+                    <h3 class="text-lg font-semibold">学习追踪</h3>
+                </div>
+                <ul class="space-y-2 text-sm text-gray-600">
+                    <li>• 测试结果反馈</li>
+                    <li>• AI批改分析</li>
+                    <li>• 历史记录</li>
+                    <li>• 进度追踪</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 详细页面原型 -->
+        <div class="bg-white rounded-lg shadow-sm border mb-8">
+            <!-- 页面切换导航 -->
+            <div class="border-b">
+                <div class="flex space-x-1 px-6">
+                    <button class="px-4 py-3 text-primary border-b-2 border-primary font-medium">登录页面</button>
+                    <button class="px-4 py-3 text-gray-600 hover:text-primary transition-colors">知识库页面</button>
+                    <button class="px-4 py-3 text-gray-600 hover:text-primary transition-colors">智能复习</button>
+                    <button class="px-4 py-3 text-gray-600 hover:text-primary transition-colors">模拟测试</button>
+                    <button class="px-4 py-3 text-gray-600 hover:text-primary transition-colors">测试结果</button>
+                </div>
+            </div>
+
+            <!-- 页面内容 -->
+            <div class="p-8">
+                <!-- 登录页面原型 -->
+                <div class="max-w-md mx-auto">
+                    <div class="text-center mb-8">
+                        <div class="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl">AI</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-900 mb-2">AI软考管家</h2>
+                        <p class="text-gray-600">智能复习，高效备考</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <button class="w-full bg-green-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-green-600 transition-colors flex items-center justify-center">
+                            <span class="mr-2">微信登录</span>
+                        </button>
+                        
+                        <div class="text-center text-sm text-gray-500">
+                            <p>首次使用需要微信授权</p>
+                            <p class="mt-1">授权后即可享受个性化AI复习服务</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 技术架构说明 -->
+        <div class="bg-white rounded-lg shadow-sm border p-6">
+            <h3 class="text-lg font-semibold mb-4">技术架构说明</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h4 class="font-medium text-gray-900 mb-2">前端技术栈</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li>• 微信小程序原生框架</li>
+                        <li>• WXML + WXSS + JavaScript</li>
+                        <li>• 响应式设计</li>
+                        <li>• 微信API集成</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-medium text-gray-900 mb-2">设计规范</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li>• 微信小程序设计指南</li>
+                        <li>• 移动端优先设计</li>
+                        <li>• 简洁直观的交互</li>
+                        <li>• 统一的视觉风格</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 简单的页面切换功能
+        document.querySelectorAll('button[class*="px-4 py-3"]').forEach(button => {
+            button.addEventListener('click', function() {
+                // 移除所有激活状态
+                document.querySelectorAll('button[class*="px-4 py-3"]').forEach(btn => {
+                    btn.classList.remove('text-primary', 'border-b-2', 'border-primary', 'font-medium');
+                    btn.classList.add('text-gray-600', 'hover:text-primary');
+                });
+                
+                // 添加当前激活状态
+                this.classList.add('text-primary', 'border-b-2', 'border-primary', 'font-medium');
+                this.classList.remove('text-gray-600', 'hover:text-primary');
+            });
+        });
+    </script>
+</body>
+</html>

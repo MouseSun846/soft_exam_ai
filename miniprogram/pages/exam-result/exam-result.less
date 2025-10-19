@@ -1,0 +1,567 @@
+/* exam-result.wxss */
+@import '../../styles/adaptive.less';
+
+.container {
+  .responsive-container();
+  background-color: #f8fafc;
+  min-height: 100vh;
+  padding-top: 0;
+  padding-bottom: 160rpx; /* 为底部悬浮菜单留出空间 */
+}
+
+/* 总体得分 */
+.score-section {
+  margin-bottom: 30rpx;
+}
+
+.score-card {
+  background: white;
+  border-radius: 20rpx;
+  padding: 40rpx 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.score-display {
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+
+.score-circle {
+  position: relative;
+  width: 200rpx;
+  height: 200rpx;
+  background: linear-gradient(135deg, #10b981, #3b82f6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20rpx;
+}
+
+.score-value {
+  font-size: 60rpx;
+  font-weight: 700;
+  color: white;
+}
+
+.score-unit {
+  font-size: 24rpx;
+  color: white;
+  margin-left: 5rpx;
+}
+
+.score-grade {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1f2937;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.score-desc {
+  font-size: 26rpx;
+  color: #6b7280;
+}
+
+.score-breakdown {
+  display: flex;
+  justify-content: space-around;
+  border-top: 1rpx solid #f3f4f6;
+  padding-top: 30rpx;
+}
+
+.breakdown-item {
+  text-align: center;
+}
+
+.breakdown-value {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #1f2937;
+  display: block;
+  margin-bottom: 5rpx;
+}
+
+.breakdown-label {
+  font-size: 24rpx;
+  color: #6b7280;
+}
+
+/* 题目详细分析 */
+.analysis-section {
+  margin-bottom: 30rpx;
+}
+
+.analysis-card {
+  background: white;
+  border-radius: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.section-header {
+  padding: 30rpx;
+  border-bottom: 1rpx solid #f3f4f6;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.question-analysis {
+  padding: 0;
+}
+
+.analysis-item {
+  padding: 30rpx;
+  border-bottom: 1rpx solid #f3f4f6;
+}
+
+.analysis-item:last-child {
+  border-bottom: none;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.status-badge {
+  font-size: 22rpx;
+  padding: 6rpx 12rpx;
+  border-radius: 10rpx;
+  font-weight: 500;
+}
+
+.status-badge.correct {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-badge.partial {
+  background: #fef7cd;
+  color: #92400e;
+}
+
+.status-badge.wrong {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.question-meta {
+  font-size: 24rpx;
+  color: #6b7280;
+}
+
+.question-content {
+  margin-bottom: 20rpx;
+}
+
+.question-text {
+  font-size: 28rpx;
+  color: #1f2937;
+  line-height: 1.5;
+  margin-bottom: 20rpx;
+  display: block;
+}
+
+.answer-comparison {
+  background: #f9fafb;
+  border-radius: 10rpx;
+  padding: 20rpx;
+  margin-bottom: 15rpx;
+}
+
+.answer-item {
+  display: flex;
+  margin-bottom: 10rpx;
+}
+
+.answer-item:last-child {
+  margin-bottom: 0;
+}
+
+.answer-label {
+  font-size: 24rpx;
+  color: #6b7280;
+  width: 120rpx;
+  flex-shrink: 0;
+}
+
+.answer-text {
+  font-size: 24rpx;
+  flex: 1;
+}
+
+.answer-text.correct {
+  color: #065f46;
+  font-weight: 500;
+}
+
+.answer-text.wrong {
+  color: #991b1b;
+  font-weight: 500;
+}
+
+.ai-feedback {
+  background: #f0f9ff;
+  border: 1rpx solid #bae6fd;
+  border-radius: 10rpx;
+  padding: 20rpx;
+}
+
+.feedback-label {
+  font-size: 24rpx;
+  color: #0369a1;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.feedback-text {
+  font-size: 24rpx;
+  color: #0369a1;
+  line-height: 1.5;
+}
+
+/* AI综合评估 */
+.summary-section {
+  margin-bottom: 30rpx;
+}
+
+.summary-card {
+  background: white;
+  border-radius: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.knowledge-assessment {
+  padding: 30rpx;
+  border-bottom: 1rpx solid #f3f4f6;
+}
+
+.assessment-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1f2937;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.knowledge-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15rpx;
+}
+
+.knowledge-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15rpx;
+  background: #f9fafb;
+  border-radius: 10rpx;
+}
+
+.topic-name {
+  font-size: 26rpx;
+  color: #374151;
+}
+
+.topic-level {
+  font-size: 22rpx;
+  padding: 6rpx 12rpx;
+  border-radius: 8rpx;
+  font-weight: 500;
+}
+
+.topic-level.good {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.topic-level.fair {
+  background: #fef7cd;
+  color: #92400e;
+}
+
+.topic-level.weak {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.review-suggestions {
+  padding: 30rpx;
+}
+
+.suggestions-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1f2937;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.suggestions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15rpx;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15rpx;
+  padding: 15rpx;
+  background: #f0f9ff;
+  border-radius: 10rpx;
+}
+
+.suggestion-icon {
+  font-size: 24rpx;
+  flex-shrink: 0;
+  margin-top: 2rpx;
+}
+
+.suggestion-text {
+  font-size: 26rpx;
+  color: #0369a1;
+  line-height: 1.4;
+  flex: 1;
+}
+
+/* 操作按钮 */
+.action-section {
+  margin-bottom: 30rpx;
+}
+
+/* 响应式调整 */
+@media (max-width: 320px) {
+  .container {
+    padding: 15rpx;
+  }
+  
+  .score-card {
+    padding: 30rpx 20rpx;
+  }
+  
+  .score-circle {
+    width: 160rpx;
+    height: 160rpx;
+  }
+  
+  .score-value {
+    font-size: 48rpx;
+  }
+  
+  .score-grade {
+    font-size: 28rpx;
+  }
+  
+  .score-desc {
+    font-size: 24rpx;
+  }
+  
+  .breakdown-value {
+    font-size: 28rpx;
+  }
+  
+  .breakdown-label {
+    font-size: 22rpx;
+  }
+  
+  .section-header {
+    padding: 20rpx;
+  }
+  
+  .analysis-item {
+    padding: 20rpx;
+  }
+  
+  .question-text {
+    font-size: 26rpx;
+  }
+  
+  .answer-label {
+    font-size: 22rpx;
+    width: 100rpx;
+  }
+  
+  .answer-text {
+    font-size: 22rpx;
+  }
+  
+  .feedback-label {
+    font-size: 22rpx;
+  }
+  
+  .feedback-text {
+    font-size: 22rpx;
+  }
+  
+  .knowledge-assessment {
+    padding: 20rpx;
+  }
+  
+  .assessment-title {
+    font-size: 26rpx;
+  }
+  
+  .topic-name {
+    font-size: 24rpx;
+  }
+  
+  .topic-level {
+    font-size: 20rpx;
+    padding: 5rpx 10rpx;
+  }
+  
+  .review-suggestions {
+    padding: 20rpx;
+  }
+  
+  .suggestions-title {
+    font-size: 26rpx;
+  }
+  
+  .suggestion-text {
+    font-size: 24rpx;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    gap: 15rpx;
+  }
+  
+  .action-btn {
+    height: 70rpx;
+    font-size: 26rpx;
+  }
+}
+
+@media (min-width: 414px) {
+  .container {
+    padding: 25rpx;
+  }
+  
+  .score-card {
+    padding: 50rpx 40rpx;
+  }
+  
+  .score-circle {
+    width: 240rpx;
+    height: 240rpx;
+  }
+  
+  .score-value {
+    font-size: 72rpx;
+  }
+  
+  .score-grade {
+    font-size: 36rpx;
+  }
+  
+  .score-desc {
+    font-size: 28rpx;
+  }
+  
+  .breakdown-value {
+    font-size: 36rpx;
+  }
+  
+  .breakdown-label {
+    font-size: 26rpx;
+  }
+  
+  .section-header {
+    padding: 40rpx;
+  }
+  
+  .analysis-item {
+    padding: 40rpx;
+  }
+  
+  .question-text {
+    font-size: 30rpx;
+  }
+  
+  .answer-label {
+    font-size: 26rpx;
+    width: 140rpx;
+  }
+  
+  .answer-text {
+    font-size: 26rpx;
+  }
+  
+  .feedback-label {
+    font-size: 26rpx;
+  }
+  
+  .feedback-text {
+    font-size: 26rpx;
+  }
+  
+  .knowledge-assessment {
+    padding: 40rpx;
+  }
+  
+  .assessment-title {
+    font-size: 30rpx;
+  }
+  
+  .topic-name {
+    font-size: 28rpx;
+  }
+  
+  .topic-level {
+    font-size: 24rpx;
+    padding: 7rpx 14rpx;
+  }
+  
+  .review-suggestions {
+    padding: 40rpx;
+  }
+  
+  .suggestions-title {
+    font-size: 30rpx;
+  }
+  
+  .suggestion-text {
+    font-size: 28rpx;
+  }
+  
+  .action-btn {
+    height: 90rpx;
+    font-size: 30rpx;
+  }
+}
+
+.action-buttons {
+  display: flex;
+  gap: 20rpx;
+}
+
+.action-btn {
+  flex: 1;
+  height: 80rpx;
+  border: none;
+  border-radius: 15rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+.retest-btn {
+  background: #3b82f6;
+  color: white;
+}
+
+.home-btn {
+  background: #f3f4f6;
+  color: #374151;
+}

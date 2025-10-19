@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "智能复习",
+  "usingComponents": {
+    "bottom-tabbar": "/components/bottom-tabbar/bottom-tabbar"
+  }
+}
