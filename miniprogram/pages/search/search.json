@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "bottom-tabbar": "/components/bottom-tabbar/bottom-tabbar"
+  },
+  "navigationBarTitleText": "搜索"
+}

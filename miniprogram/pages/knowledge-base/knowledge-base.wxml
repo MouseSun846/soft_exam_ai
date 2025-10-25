@@ -8,17 +8,17 @@
 
 <view class="container">
   <!-- 搜索和操作栏 -->
-  <view class="search-section">
+  <view class="search-section" bindtap="goToSearch">
     <view class="search-box">
+      <text class="search-icon">🔍</text>
       <input 
         class="search-input" 
         placeholder="搜索文档名称或内容关键词..."
         bindinput="onSearchInput"
         value="{{searchKeyword}}"
+        disabled
       />
-      <text class="search-icon">🔍</text>
     </view>
-    <button class="upload-btn" bindtap="uploadDocument">上传文档</button>
   </view>
 
   <!-- 上传区域 -->

@@ -17,6 +17,12 @@ Component({
   },
 
   methods: {
+    goToSearch() {
+      wx.navigateTo({
+        url: '/pages/search/search'
+      });
+    },
+
     loadKnowledgeBases() {
       // 模拟加载知识库数据
       const knowledgeBases = [

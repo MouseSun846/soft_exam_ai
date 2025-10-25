@@ -1,0 +1,111 @@
+<!-- search.wxml -->
+
+<!-- 页面头 -->
+<view class="page-header">
+  <text class="page-header-title">搜索</text>
+</view>
+<view class="page-header-placeholder"></view>
+
+<view class="container">
+
+  <!-- 搜索框区域 -->
+  <view class="search-header">
+    <view class="search-box-wrapper">
+      <button class="back-btn" bindtap="onBack">←</button>
+      <view class="search-box">
+        <text class="search-prefix-icon">🔍</text>
+        <input 
+          class="search-input" 
+          placeholder="搜索文档名称或内容关键词..."
+          bindinput="onSearchInput"
+          bindconfirm="onSearchConfirm"
+          value="{{searchKeyword}}"
+          focus="{{true}}"
+        />
+        <text class="search-clear-icon" bindtap="onClearInput" wx:if="{{searchKeyword}}">×</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 默认空状态 -->
+  <view class="default-empty-state" wx:if="{{!searchResults.length && !searchKeyword}}">
+    <image class="empty-icon" src="/images/search-default.png" mode="aspectFit"></image>
+    <text class="empty-text">搜索你想要的内容</text>
+    <text class="empty-subtext">输入关键词开始搜索</text>
+  </view>
+
+  <!-- 搜索历史记录 -->
+  <view class="history-section" wx:if="{{!searchResults.length && searchKeyword && searchHistory.length > 0}}">
+    <view class="section-header">
+      <text class="section-title">搜索历史</text>
+      <text class="clear-history" bindtap="clearHistory">清除历史</text>
+    </view>
+    <view class="history-list">
+      <block wx:for="{{searchHistory}}" wx:key="index">
+        <view class="history-item" bindtap="onHistoryTagTap" data-keyword="{{item}}">
+          <view class="history-item-content">
+            <text class="history-item-icon">🔍</text>
+            <text class="history-item-text">{{item}}</text>
+          </view>
+          <text class="history-item-delete" bindtap="removeHistoryItem" data-keyword="{{item}}">×</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 搜索结果 -->
+  <view class="results-section" wx:if="{{searchResults.length > 0}}">
+    <view class="section-header">
+      <text class="section-title">搜索结果</text>
+      <text class="result-count">{{searchResults.length}} 个结果</text>
+    </view>
+
+    <!-- 瀑布流显示 -->
+    <view class="waterfall-layout">
+      <view class="waterfall-column" id="column1">
+        <block wx:for="{{leftColumnItems}}" wx:key="id">
+          <view class="knowledge-item" bindtap="viewKnowledgeDetail" data-id="{{item.id}}">
+            <view class="knowledge-thumb">
+              <image class="thumb-img" src="{{item.thumbnail || '/images/default-knowledge.png'}}" mode="aspectFill"></image>
+            </view>
+            <view class="knowledge-info">
+              <text class="knowledge-name">{{item.name}}</text>
+              <view class="knowledge-meta">
+                <text class="document-count">{{item.documentCount}} 个文档</text>
+                <text class="knowledge-time">{{item.updatedAt}}</text>
+              </view>
+              <view class="knowledge-description">{{item.description}}</view>
+            </view>
+          </view>
+        </block>
+      </view>
+      <view class="waterfall-column" id="column2">
+        <block wx:for="{{rightColumnItems}}" wx:key="id">
+          <view class="knowledge-item" bindtap="viewKnowledgeDetail" data-id="{{item.id}}">
+            <view class="knowledge-thumb">
+              <image class="thumb-img" src="{{item.thumbnail || '/images/default-knowledge.png'}}" mode="aspectFill"></image>
+            </view>
+            <view class="knowledge-info">
+              <text class="knowledge-name">{{item.name}}</text>
+              <view class="knowledge-meta">
+                <text class="document-count">{{item.documentCount}} 个文档</text>
+                <text class="knowledge-time">{{item.updatedAt}}</text>
+              </view>
+              <view class="knowledge-description">{{item.description}}</view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{!searchResults.length && searchKeyword && !isLoading}}">
+    <image class="empty-icon" src="/images/search-empty.png" mode="aspectFit"></image>
+    <text class="empty-text">没有找到相关内容</text>
+    <text class="empty-subtext">试试其他关键词吧</text>
+  </view>
+</view>
+
+<!-- 底部导航栏 -->
+<bottom-tabbar current-tab="{{1}}"></bottom-tabbar>

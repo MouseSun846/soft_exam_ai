@@ -6,7 +6,8 @@
     "pages/smart-review/smart-review",
     "pages/profile/profile",
     "pages/exam/exam",
-    "pages/exam-result/exam-result"
+    "pages/exam-result/exam-result",
+    "pages/search/search"
   ],
   "window": {
     "navigationBarTextStyle": "black",

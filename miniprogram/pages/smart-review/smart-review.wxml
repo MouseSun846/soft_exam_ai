@@ -11,15 +11,17 @@
   <view class="input-section">
     <view class="input-card">
       <text class="section-title">输入复习主题</text>
-      <input 
-        class="theme-input" 
-        placeholder="请输入您想复习的知识点，如 TCP/IP、软件工程、数据库原理等"
-        bindinput="onThemeInput"
-        value="{{reviewTheme}}"
-      />
-      <button class="generate-btn" bindtap="generateReviewPoints" disabled="{{!reviewTheme || isGenerating}}">
-        {{isGenerating ? '生成中...' : '生成复习要点'}}
-      </button>
+      <view class="input-wrapper">
+        <input 
+          class="theme-input" 
+          placeholder="请输入您想复习的知识点，如 TCP/IP、软件工程、数据库原理等"
+          bindinput="onThemeInput"
+          value="{{reviewTheme}}"
+        />
+        <button class="generate-btn" bindtap="generateReviewPoints" disabled="{{!reviewTheme || isGenerating}}">
+          {{isGenerating ? '生成中...' : '生成'}}
+        </button>
+      </view>
     </view>
   </view>
 
