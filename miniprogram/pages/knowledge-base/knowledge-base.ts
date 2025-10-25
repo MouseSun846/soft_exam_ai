@@ -3,178 +3,204 @@ Component({
   data: {
     searchKeyword: '',
     showUploadModal: false,
-    filteredDocuments: [
-      {
-        id: 1,
-        name: '软件工程基础.pdf',
-        type: 'PDF文档',
-        time: '2024-10-15 14:30',
-        status: 'ready',
-        statusText: '已就绪',
-        icon: '📄'
-      },
-      {
-        id: 2,
-        name: '网络技术.docx',
-        type: 'Word文档',
-        time: '2024-10-19 10:15',
-        status: 'parsing',
-        statusText: '解析中',
-        icon: '📄'
-      },
-      {
-        id: 3,
-        name: '数据库系统.md',
-        type: 'Markdown',
-        time: '2024-10-18 16:45',
-        status: 'error',
-        statusText: '解析失败',
-        icon: '📄'
-      },
-      {
-        id: 4,
-        name: '操作系统原理.txt',
-        type: '文本文件',
-        time: '2024-10-12 09:20',
-        status: 'ready',
-        statusText: '已就绪',
-        icon: '📄'
-      }
-    ],
-    allDocuments: []
+    filteredKnowledgeBases: [] as any[],
+    allKnowledgeBases: [] as any[],
+    // 统计数据
+    totalDocuments: 0,
+    parsedDocuments: 0
   },
 
   lifetimes: {
     attached() {
-      this.loadDocuments()
+      this.loadKnowledgeBases()
     }
   },
 
   methods: {
-    loadDocuments() {
-      // 模拟加载文档数据
-      const documents = this.data.filteredDocuments
+    loadKnowledgeBases() {
+      // 模拟加载知识库数据
+      const knowledgeBases = [
+        {
+          id: 1,
+          name: '软件工程知识库',
+          description: '包含软件工程相关的所有文档和资料',
+          documentCount: 12,
+          updatedAt: '2024-10-20',
+          thumbnail: ''
+        },
+        {
+          id: 2,
+          name: '网络技术知识库',
+          description: '网络协议、架构和安全相关文档',
+          documentCount: 8,
+          updatedAt: '2024-10-18',
+          thumbnail: ''
+        },
+        {
+          id: 3,
+          name: '数据库系统知识库',
+          description: '数据库设计、优化和管理资料',
+          documentCount: 15,
+          updatedAt: '2024-10-15',
+          thumbnail: ''
+        },
+        {
+          id: 4,
+          name: '操作系统知识库',
+          description: '操作系统原理和实践指南',
+          documentCount: 10,
+          updatedAt: '2024-10-12',
+          thumbnail: ''
+        }
+      ];
+      
+      // 计算统计数据
+      let totalDocs = 0;
+      let parsedDocs = 0;
+      
+      knowledgeBases.forEach(kb => {
+        totalDocs += kb.documentCount;
+      });
+      
       this.setData({
-        allDocuments: documents,
-        filteredDocuments: documents
-      })
+        allKnowledgeBases: knowledgeBases,
+        filteredKnowledgeBases: knowledgeBases,
+        totalDocuments: totalDocs,
+        parsedDocuments: parsedDocs
+      });
     },
 
     onSearchInput(e: any) {
-      const keyword = e.detail.value
-      this.setData({ searchKeyword: keyword })
-      this.filterDocuments(keyword)
+      const keyword = e.detail.value;
+      this.setData({ searchKeyword: keyword });
+      this.filterKnowledgeBases(keyword);
     },
 
-    filterDocuments(keyword: string) {
+    filterKnowledgeBases(keyword: string) {
       if (!keyword.trim()) {
-        this.setData({ filteredDocuments: this.data.allDocuments })
-        return
+        this.setData({ filteredKnowledgeBases: this.data.allKnowledgeBases });
+        return;
       }
 
-      const filtered = this.data.allDocuments.filter(doc => 
-        doc.name.toLowerCase().includes(keyword.toLowerCase()) ||
-        doc.type.toLowerCase().includes(keyword.toLowerCase())
-      )
+      const filtered = this.data.allKnowledgeBases.filter(kb => 
+        kb.name.toLowerCase().includes(keyword.toLowerCase()) ||
+        kb.description.toLowerCase().includes(keyword.toLowerCase())
+      );
       
-      this.setData({ filteredDocuments: filtered })
+      this.setData({ filteredKnowledgeBases: filtered });
     },
 
     uploadDocument() {
-      this.setData({ showUploadModal: true })
+      this.setData({ showUploadModal: true });
     },
 
     closeUploadModal() {
-      this.setData({ showUploadModal: false })
+      this.setData({ showUploadModal: false });
     },
 
     chooseFromWechat() {
       wx.showToast({
         title: '功能开发中',
         icon: 'none'
-      })
-      this.closeUploadModal()
+      });
+      this.closeUploadModal();
     },
 
     chooseFromLocal() {
-      wx.chooseMessageFile({
-        count: 1,
-        type: 'file',
+      // 创建新知识库的逻辑
+      wx.showModal({
+        title: '创建知识库',
+        content: '请输入新知识库的名称',
+        editable: true,
+        placeholderText: '知识库名称',
         success: (res) => {
-          const tempFile = res.tempFiles[0]
-          this.uploadFile(tempFile)
+          if (res.confirm && res.content) {
+            this.createKnowledgeBase(res.content);
+          }
         }
-      })
-      this.closeUploadModal()
+      });
+      this.closeUploadModal();
     },
 
-    uploadFile(file: any) {
-      wx.showLoading({ title: '上传中...' })
+    createKnowledgeBase(name: string) {
+      wx.showLoading({ title: '创建中...' });
       
-      // 模拟上传过程
+      // 模拟创建过程
       setTimeout(() => {
-        wx.hideLoading()
+        wx.hideLoading();
         wx.showToast({
-          title: '上传成功',
+          title: '创建成功',
           icon: 'success'
-        })
+        });
         
-        // 添加到文档列表
-        const newDoc = {
+        // 添加到知识库列表
+        const newKnowledgeBase = {
           id: Date.now(),
-          name: file.name,
-          type: this.getFileType(file.name),
-          time: this.formatTime(new Date()),
-          status: 'parsing',
-          statusText: '解析中',
-          icon: '📄'
-        }
+          name: name,
+          description: '新建的知识库',
+          documentCount: 0,
+          updatedAt: this.formatTime(new Date()),
+          thumbnail: ''
+        };
         
         this.setData({
-          allDocuments: [newDoc, ...this.data.allDocuments],
-          filteredDocuments: [newDoc, ...this.data.filteredDocuments]
-        })
-      }, 2000)
+          allKnowledgeBases: [newKnowledgeBase, ...this.data.allKnowledgeBases],
+          filteredKnowledgeBases: [newKnowledgeBase, ...this.data.filteredKnowledgeBases],
+          totalDocuments: this.data.totalDocuments
+        });
+      }, 1000);
     },
 
-    getFileType(filename: string): string {
-      const parts = filename.split('.')
-      const ext = parts.length > 1 ? parts.pop()!.toLowerCase() : ''
-      const types: any = {
-        'pdf': 'PDF文档',
-        'doc': 'Word文档',
-        'docx': 'Word文档',
-        'txt': '文本文件',
-        'md': 'Markdown'
-      }
-      return types[ext] || '文档'
+    viewKnowledgeBase(e: any) {
+      const kbId = e.currentTarget.dataset.id;
+      wx.navigateTo({
+        url: `/pages/knowledge-base-detail/knowledge-base-detail?id=${kbId}`
+      });
+    },
+
+    deleteKnowledgeBase(e: any) {
+      const kbId = e.currentTarget.dataset.id;
+      
+      wx.showModal({
+        title: '确认删除',
+        content: '确定要删除这个知识库吗？此操作不可恢复。',
+        success: (res) => {
+          if (res.confirm) {
+            // 执行删除操作
+            const updatedKnowledgeBases = this.data.allKnowledgeBases.filter((kb: any) => kb.id !== kbId);
+            const filteredKnowledgeBases = this.data.filteredKnowledgeBases.filter((kb: any) => kb.id !== kbId);
+            
+            // 重新计算统计数据
+            let totalDocs = 0;
+            updatedKnowledgeBases.forEach(kb => {
+              totalDocs += kb.documentCount;
+            });
+            
+            this.setData({
+              allKnowledgeBases: updatedKnowledgeBases,
+              filteredKnowledgeBases: filteredKnowledgeBases,
+              totalDocuments: totalDocs
+            });
+            
+            wx.showToast({
+              title: '删除成功',
+              icon: 'success'
+            });
+          }
+        }
+      });
+    },
+
+    // 阻止事件冒泡
+    stopEventPropagation(e: any) {
+      e.stopPropagation();
     },
 
     formatTime(date: Date): string {
-      const year = date.getFullYear()
-      const month = String(date.getMonth() + 1).padStart(2, '0')
-      const day = String(date.getDate()).padStart(2, '0')
-      const hour = String(date.getHours()).padStart(2, '0')
-      const minute = String(date.getMinutes()).padStart(2, '0')
-      return `${year}-${month}-${day} ${hour}:${minute}`
-    },
-
-    viewDocument(e: any) {
-      const docId = e.currentTarget.dataset.id
-      const document = this.data.allDocuments.find(doc => doc.id === docId)
-      
-      if (document) {
-        if (document.status === 'ready') {
-          wx.navigateTo({
-            url: `/pages/document-detail/document-detail?id=${docId}`
-          })
-        } else {
-          wx.showToast({
-            title: document.statusText,
-            icon: 'none'
-          })
-        }
-      }
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
     }
   }
-})
+});

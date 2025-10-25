@@ -30,27 +30,46 @@
     </view>
   </view>
 
-  <!-- 文档列表 -->
-  <view class="document-section">
+  <!-- 知识库统计 -->
+  <view class="stats-section">
+    <view class="stat-card">
+      <text class="stat-number">{{knowledgeBases.length}}</text>
+      <text class="stat-label">知识库数量</text>
+    </view>
+    <view class="stat-card">
+      <text class="stat-number">{{totalDocuments}}</text>
+      <text class="stat-label">文档总数</text>
+    </view>
+    <view class="stat-card">
+      <text class="stat-number">{{parsedDocuments}}</text>
+      <text class="stat-label">已解析</text>
+    </view>
+  </view>
+
+  <!-- 知识库列表 -->
+  <view class="knowledge-section">
     <view class="section-header">
-      <text class="section-title">我的文档</text>
-      <text class="document-count">{{filteredDocuments.length}} 个文档</text>
+      <text class="section-title">我的知识库</text>
+      <text class="document-count">{{filteredKnowledgeBases.length}} 个知识库</text>
     </view>
 
-    <view class="document-list">
-      <block wx:for="{{filteredDocuments}}" wx:key="id">
-        <view class="document-item" bindtap="viewDocument" data-id="{{item.id}}">
-          <view class="document-icon {{item.status}}">{{item.icon}}</view>
-          <view class="document-info">
-            <text class="document-name">{{item.name}}</text>
-            <view class="document-meta">
-              <text class="document-type">{{item.type}}</text>
-              <text class="document-time">{{item.time}}</text>
-            </view>
+    <view class="knowledge-list">
+      <block wx:for="{{filteredKnowledgeBases}}" wx:key="id">
+        <view class="knowledge-item" bindtap="viewKnowledgeBase" data-id="{{item.id}}">
+          <view class="knowledge-thumb">
+            <image class="thumb-img" src="{{item.thumbnail || '/images/default-knowledge.png'}}" mode="aspectFill"></image>
           </view>
-          <view class="document-status {{item.status}}">
-            <text class="status-text">{{item.statusText}}</text>
-            <view wx:if="{{item.status === 'parsing'}}" class="loading-spinner"></view>
+          <view class="knowledge-info">
+            <text class="knowledge-name">{{item.name}}</text>
+            <view class="knowledge-meta">
+              <text class="document-count">{{item.documentCount}} 个文档</text>
+              <text class="knowledge-time">{{item.updatedAt}}</text>
+            </view>
+            <view class="knowledge-description">{{item.description}}</view>
+          </view>
+          <view class="knowledge-actions">
+            <button class="action-btn view-btn" bindtap="viewKnowledgeBase" data-id="{{item.id}}">查看</button>
+            <button class="action-btn delete-btn" bindtap="deleteKnowledgeBase" data-id="{{item.id}}" catchtap="stopEventPropagation">删除</button>
           </view>
         </view>
       </block>

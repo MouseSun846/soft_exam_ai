@@ -1,9 +1,10 @@
 /* smart-review.wxss */
 @import '../../styles/adaptive.less';
+@import '../../styles/buttons.less';
 
 .container {
   .responsive-container();
-  background-color: #f8fafc;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
   min-height: 100vh;
   padding-bottom: 160rpx; /* 为底部悬浮菜单留出空间 */
 }
@@ -17,13 +18,25 @@
   background: white;
   border-radius: 20rpx;
   padding: 30rpx;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.input-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4rpx;
+  background: linear-gradient(90deg, #3b82f6 0%, #1d4ed8 100%);
 }
 
 .section-title {
   font-size: 32rpx;
   font-weight: 600;
-  color: #1f2937;
+  color: #1e293b;
   margin-bottom: 20rpx;
   display: block;
 }
@@ -32,27 +45,40 @@
   width: 100%;
   height: 100rpx;
   padding: 0 30rpx;
-  background: #f9fafb;
-  border: 2rpx solid #e5e7eb;
+  background: #f8fafc;
+  border: 1rpx solid #e2e8f0;
   border-radius: 15rpx;
   font-size: 28rpx;
   margin-bottom: 20rpx;
+  transition: all 0.2s ease;
+  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.05);
+}
+
+.theme-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3rpx rgba(59, 130, 246, 0.2);
 }
 
 .generate-btn {
+  .btn-primary();
   width: 100%;
   height: 80rpx;
-  background: #3b82f6;
-  color: white;
-  border: none;
   border-radius: 15rpx;
   font-size: 28rpx;
-  font-weight: 500;
+  box-shadow: 0 4rpx 6rpx rgba(59, 130, 246, 0.2);
+}
+
+.generate-btn:active {
+  background: #2563eb;
+  transform: translateY(2rpx);
+  box-shadow: 0 2rpx 4rpx rgba(59, 130, 246, 0.2);
 }
 
 .generate-btn:disabled {
-  background: #9ca3af;
-  opacity: 0.6;
+  background: #cbd5e1;
+  opacity: 0.7;
+  box-shadow: none;
 }
 
 /* 内容区域 */
@@ -63,18 +89,29 @@
 .content-card {
   background: white;
   border-radius: 20rpx;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
   overflow: hidden;
+  position: relative;
+}
+
+.content-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4rpx;
+  background: linear-gradient(90deg, #10b981 0%, #059669 100%);
 }
 
 .section-header {
   padding: 30rpx;
-  border-bottom: 1rpx solid #f3f4f6;
+  border-bottom: 1rpx solid #f1f5f9;
 }
 
 .section-subtitle {
   font-size: 24rpx;
-  color: #6b7280;
+  color: #64748b;
   margin-top: 5rpx;
   display: block;
 }
@@ -91,7 +128,7 @@
 .loading-spinner {
   width: 40rpx;
   height: 40rpx;
-  border: 4rpx solid #e5e7eb;
+  border: 4rpx solid #e2e8f0;
   border-top: 4rpx solid #3b82f6;
   border-radius: 50%;
   animation: spin 1s linear infinite;
@@ -100,7 +137,7 @@
 
 .loading-text {
   font-size: 28rpx;
-  color: #6b7280;
+  color: #64748b;
 }
 
 @keyframes spin {
@@ -125,7 +162,7 @@
 .content-title {
   font-size: 32rpx;
   font-weight: 600;
-  color: #1f2937;
+  color: #1e293b;
   flex: 1;
 }
 
@@ -138,12 +175,19 @@
   display: flex;
   align-items: center;
   padding: 15rpx 20rpx;
-  border: 2rpx solid #e5e7eb;
+  border: 1rpx solid #e2e8f0;
   border-radius: 12rpx;
   background: white;
   font-size: 24rpx;
-  color: #374151;
+  color: #334155;
   gap: 8rpx;
+  transition: all 0.2s ease;
+  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.05);
+}
+
+.action-btn:active {
+  transform: translateY(1rpx);
+  box-shadow: 0 1rpx 2rpx rgba(0, 0, 0, 0.05);
 }
 
 .copy-btn:active {
@@ -163,21 +207,49 @@
 .content-body {
   font-size: 28rpx;
   line-height: 1.6;
-  color: #374151;
+  color: #334155;
 }
 
 .content-body h3 {
   font-size: 32rpx;
   font-weight: 600;
-  color: #1f2937;
+  color: #1e293b;
   margin: 30rpx 0 20rpx 0;
+  position: relative;
+  padding-left: 15rpx;
+}
+
+.content-body h3::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4rpx;
+  height: 24rpx;
+  background: #3b82f6;
+  border-radius: 2rpx;
 }
 
 .content-body h4 {
   font-size: 30rpx;
   font-weight: 600;
-  color: #1f2937;
+  color: #1e293b;
   margin: 25rpx 0 15rpx 0;
+  position: relative;
+  padding-left: 12rpx;
+}
+
+.content-body h4::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3rpx;
+  height: 20rpx;
+  background: #10b981;
+  border-radius: 1.5rpx;
 }
 
 .content-body ul, .content-body ol {
@@ -193,22 +265,36 @@
   width: 100%;
   border-collapse: collapse;
   margin: 20rpx 0;
+  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.05);
 }
 
 .content-body th, .content-body td {
-  border: 1rpx solid #d1d5db;
+  border: 1rpx solid #cbd5e1;
   padding: 15rpx;
   text-align: left;
 }
 
 .content-body th {
-  background: #f9fafb;
+  background: #f8fafc;
   font-weight: 600;
+  color: #1e293b;
+}
+
+.content-body td {
+  background: white;
 }
 
 .content-body strong {
-  color: #1f2937;
+  color: #1e293b;
   font-weight: 600;
+}
+
+.content-body code {
+  background: #f1f5f9;
+  padding: 2rpx 6rpx;
+  border-radius: 4rpx;
+  font-family: monospace;
+  font-size: 24rpx;
 }
 
 /* 空状态 */
@@ -221,12 +307,21 @@
   font-size: 80rpx;
   display: block;
   margin-bottom: 20rpx;
+  color: #94a3b8;
 }
 
 .empty-text {
   font-size: 28rpx;
-  color: #6b7280;
+  color: #64748b;
   line-height: 1.5;
+}
+
+.empty-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 10rpx;
+  display: block;
 }
 
 /* 提示区域 */
@@ -239,6 +334,7 @@
   .container {
     padding: 15rpx;
     padding-top: 100rpx;
+    padding-bottom: 160rpx; /* 为底部悬浮菜单留出空间 */
   }
   
   .input-card {
@@ -331,6 +427,7 @@
   .container {
     padding: 10rpx;
     padding-top: 90rpx;
+    padding-bottom: 160rpx; /* 为底部悬浮菜单留出空间 */
   }
   
   .input-card {
@@ -422,6 +519,7 @@
   .container {
     padding: 25rpx;
     padding-top: 130rpx;
+    padding-bottom: 160rpx; /* 为底部悬浮菜单留出空间 */
   }
   
   .input-card {
@@ -517,6 +615,12 @@
   display: flex;
   align-items: flex-start;
   gap: 20rpx;
+  box-shadow: 0 4rpx 6rpx rgba(252, 211, 77, 0.1);
+}
+
+.tips-card:hover {
+  transform: translateY(-2rpx);
+  box-shadow: 0 6rpx 12rpx rgba(252, 211, 77, 0.15);
 }
 
 .tips-icon {

@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/knowledge-base/knowledge-base",
+    "pages/knowledge-base-detail/knowledge-base-detail",
     "pages/smart-review/smart-review",
     "pages/profile/profile",
     "pages/exam/exam",

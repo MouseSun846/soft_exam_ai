@@ -1,59 +1,43 @@
 /**app.wxss**/
+@import './styles/buttons.less';
+
 page {
-  background-color: #f8fafc;
+  background-color: #f1f5f9;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: #1e293b;
 }
 
 /* 全局容器样式 */
 .container {
   min-height: 100vh;
-  background-color: #f8fafc;
-}
-
-/* 全局按钮样式 */
-.btn-primary {
-  background: #3b82f6;
-  color: white;
-  border: none;
-  border-radius: 12rpx;
-  font-size: 28rpx;
-  font-weight: 500;
-  padding: 20rpx 30rpx;
-}
-
-.btn-primary:active {
-  background: #2563eb;
-}
-
-.btn-secondary {
-  background: #f3f4f6;
-  color: #374151;
-  border: none;
-  border-radius: 12rpx;
-  font-size: 28rpx;
-  font-weight: 500;
-  padding: 20rpx 30rpx;
-}
-
-.btn-secondary:active {
-  background: #e5e7eb;
+  background-color: #f1f5f9;
+  padding: 20rpx;
 }
 
 /* 全局卡片样式 */
 .card {
   background: white;
   border-radius: 20rpx;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
   overflow: hidden;
+  margin-bottom: 20rpx;
 }
 
 .card-header {
   padding: 30rpx;
-  border-bottom: 1rpx solid #f3f4f6;
+  border-bottom: 1rpx solid #f1f5f9;
 }
 
 .card-body {
   padding: 30rpx;
+}
+
+.card-footer {
+  padding: 30rpx;
+  border-top: 1rpx solid #f1f5f9;
+  background: #f8fafc;
 }
 
 /* 全局加载状态 */
@@ -73,10 +57,16 @@ page {
 .loading-spinner {
   width: 60rpx;
   height: 60rpx;
-  border: 4rpx solid #e5e7eb;
+  border: 4rpx solid #e2e8f0;
   border-top: 4rpx solid #3b82f6;
   border-radius: 50%;
   animation: spin 1s linear infinite;
+}
+
+.loading-text {
+  margin-top: 20rpx;
+  font-size: 28rpx;
+  color: #64748b;
 }
 
 @keyframes spin {
@@ -87,37 +77,134 @@ page {
 /* 全局空状态 */
 .empty-state {
   text-align: center;
-  padding: 60rpx 30rpx;
+  padding: 80rpx 30rpx;
 }
 
 .empty-icon {
   font-size: 80rpx;
   margin-bottom: 20rpx;
   display: block;
+  color: #94a3b8;
 }
 
 .empty-text {
   font-size: 28rpx;
-  color: #6b7280;
+  color: #64748b;
   line-height: 1.5;
+}
+
+.empty-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 10rpx;
+  display: block;
 }
 
 /* 全局错误状态 */
 .error-state {
   text-align: center;
-  padding: 60rpx 30rpx;
+  padding: 80rpx 30rpx;
 }
 
 .error-icon {
   font-size: 80rpx;
   margin-bottom: 20rpx;
   display: block;
+  color: #ef4444;
 }
 
 .error-text {
   font-size: 28rpx;
   color: #ef4444;
   line-height: 1.5;
+}
+
+.error-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 10rpx;
+  display: block;
+}
+
+/* 全局表单元素 */
+.form-input {
+  width: 100%;
+  height: 80rpx;
+  padding: 0 30rpx;
+  background: #f8fafc;
+  border: 1rpx solid #e2e8f0;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3rpx rgba(59, 130, 246, 0.2);
+}
+
+.form-textarea {
+  width: 100%;
+  min-height: 120rpx;
+  padding: 20rpx 30rpx;
+  background: #f8fafc;
+  border: 1rpx solid #e2e8f0;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+  line-height: 1.5;
+}
+
+.form-textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3rpx rgba(59, 130, 246, 0.2);
+}
+
+/* 全局标签 */
+.badge {
+  display: inline-block;
+  padding: 6rpx 12rpx;
+  border-radius: 12rpx;
+  font-size: 22rpx;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.badge-primary {
+  .badge();
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.badge-success {
+  .badge();
+  background: #d1fae5;
+  color: #047857;
+}
+
+.badge-warning {
+  .badge();
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.badge-error {
+  .badge();
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* 全局分隔线 */
+.divider {
+  height: 1rpx;
+  background: #e2e8f0;
+  margin: 20rpx 0;
 }
 
 /* 响应式布局 */
@@ -130,4 +217,23 @@ page {
 /* 安全区域适配 */
 .safe-area {
   padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* 动画效果 */
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
 }

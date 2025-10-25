@@ -1,9 +1,10 @@
 /* exam.wxss */
 @import '../../styles/adaptive.less';
+@import '../../styles/buttons.less';
 
 .container {
   .responsive-container();
-  background-color: #f8fafc;
+  background: linear-gradient(135deg, #fefce8 0%, #fef3c7 100%);
   min-height: 100vh;
   padding-top: 0;
   padding-bottom: 160rpx; /* 为底部悬浮菜单留出空间 */
@@ -18,7 +19,19 @@
   background: white;
   border-radius: 20rpx;
   padding: 30rpx;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.info-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4rpx;
+  background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%);
 }
 
 .info-header {
@@ -28,14 +41,14 @@
 .exam-title {
   font-size: 32rpx;
   font-weight: 600;
-  color: #1f2937;
+  color: #1e293b;
   display: block;
   margin-bottom: 10rpx;
 }
 
 .exam-stats {
   font-size: 26rpx;
-  color: #6b7280;
+  color: #64748b;
 }
 
 .progress-info {
@@ -45,13 +58,13 @@
 .progress-text {
   font-size: 36rpx;
   font-weight: 700;
-  color: #3b82f6;
+  color: #f59e0b;
   display: block;
 }
 
 .progress-label {
   font-size: 24rpx;
-  color: #6b7280;
+  color: #64748b;
 }
 
 /* 题目区域 */
@@ -62,13 +75,24 @@
 .question-card {
   background: white;
   border-radius: 20rpx;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
   overflow: hidden;
+  position: relative;
+}
+
+.question-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4rpx;
+  background: linear-gradient(90deg, #ef4444 0%, #dc2626 100%);
 }
 
 .question-header {
   padding: 30rpx;
-  border-bottom: 1rpx solid #f3f4f6;
+  border-bottom: 1rpx solid #f1f5f9;
 }
 
 .question-meta {
@@ -101,7 +125,7 @@
 
 .question-number {
   font-size: 24rpx;
-  color: #6b7280;
+  color: #64748b;
 }
 
 /* 题目内容 */
@@ -112,9 +136,10 @@
 .question-text {
   font-size: 30rpx;
   line-height: 1.5;
-  color: #1f2937;
+  color: #1e293b;
   margin-bottom: 30rpx;
   display: block;
+  font-weight: 500;
 }
 
 /* 填空题 */
@@ -126,10 +151,18 @@
   width: 100%;
   height: 80rpx;
   padding: 0 30rpx;
-  background: #f9fafb;
-  border: 2rpx solid #e5e7eb;
+  background: #f8fafc;
+  border: 1rpx solid #e2e8f0;
   border-radius: 15rpx;
   font-size: 28rpx;
+  transition: all 0.2s ease;
+  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.05);
+}
+
+.fill-input:focus {
+  outline: none;
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 3rpx rgba(245, 158, 11, 0.2);
 }
 
 /* 选择题 */
@@ -141,34 +174,44 @@
   display: flex;
   align-items: center;
   padding: 25rpx;
-  border: 2rpx solid #e5e7eb;
+  border: 1rpx solid #e2e8f0;
   border-radius: 15rpx;
   margin-bottom: 15rpx;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  background: white;
+  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.05);
 }
 
 .option-item:last-child {
   margin-bottom: 0;
 }
 
+.option-item:hover {
+  background: #f8fafc;
+  transform: translateX(5rpx);
+  border-color: #cbd5e1;
+}
+
 .option-item.selected {
   border-color: #3b82f6;
-  background: #f0f7ff;
+  background: #f0f9ff;
+  box-shadow: 0 4rpx 8rpx rgba(59, 130, 246, 0.1);
 }
 
 .option-label {
   width: 60rpx;
   height: 60rpx;
-  background: #f3f4f6;
+  background: #f1f5f9;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 24rpx;
   font-weight: 600;
-  color: #374151;
+  color: #334155;
   margin-right: 20rpx;
   flex-shrink: 0;
+  transition: all 0.2s ease;
 }
 
 .option-item.selected .option-label {
@@ -178,7 +221,7 @@
 
 .option-text {
   font-size: 28rpx;
-  color: #374151;
+  color: #334155;
   flex: 1;
 }
 
@@ -191,16 +234,24 @@
   width: 100%;
   height: 200rpx;
   padding: 20rpx;
-  background: #f9fafb;
-  border: 2rpx solid #e5e7eb;
+  background: #f8fafc;
+  border: 1rpx solid #e2e8f0;
   border-radius: 15rpx;
   font-size: 28rpx;
   line-height: 1.5;
+  transition: all 0.2s ease;
+  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.05);
+}
+
+.essay-textarea:focus {
+  outline: none;
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 3rpx rgba(245, 158, 11, 0.2);
 }
 
 .word-count {
   font-size: 24rpx;
-  color: #6b7280;
+  color: #64748b;
   text-align: right;
   display: block;
   margin-top: 10rpx;
@@ -221,11 +272,20 @@
   border-radius: 15rpx;
   font-size: 28rpx;
   font-weight: 500;
+  box-shadow: 0 4rpx 6rpx rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.nav-btn:active {
+  transform: translateY(2rpx);
+  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
 }
 
 .prev-btn {
-  background: #f3f4f6;
-  color: #374151;
+  .btn-secondary();
+  height: 80rpx;
+  border-radius: 15rpx;
+  box-shadow: 0 4rpx 6rpx rgba(0, 0, 0, 0.1);
 }
 
 .prev-btn:disabled {
@@ -233,13 +293,27 @@
 }
 
 .next-btn {
-  background: #3b82f6;
-  color: white;
+  .btn-primary();
+  height: 80rpx;
+  border-radius: 15rpx;
+  box-shadow: 0 4rpx 6rpx rgba(59, 130, 246, 0.2);
+}
+
+.next-btn:active {
+  background: #2563eb;
+  box-shadow: 0 2rpx 4rpx rgba(59, 130, 246, 0.2);
 }
 
 .submit-btn {
-  background: #ef4444;
-  color: white;
+  .btn-error();
+  height: 80rpx;
+  border-radius: 15rpx;
+  box-shadow: 0 4rpx 6rpx rgba(239, 68, 68, 0.2);
+}
+
+.submit-btn:active {
+  background: #dc2626;
+  box-shadow: 0 2rpx 4rpx rgba(239, 68, 68, 0.2);
 }
 
 /* 提交弹窗 */
@@ -249,7 +323,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -272,6 +346,13 @@
   max-width: 600rpx;
   overflow: hidden;
   box-sizing: border-box;
+  box-shadow: 0 20rpx 25rpx rgba(0, 0, 0, 0.1);
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.submit-modal.show .modal-content {
+  transform: scale(1);
 }
 
 /* 响应式调整 */
@@ -316,7 +397,7 @@
     font-size: 26rpx;
   }
   
-  .nav-btn {
+  .nav-btn, .prev-btn, .next-btn, .submit-btn {
     height: 70rpx;
     font-size: 26rpx;
   }
@@ -368,7 +449,7 @@
     font-size: 30rpx;
   }
   
-  .nav-btn {
+  .nav-btn, .prev-btn, .next-btn, .submit-btn {
     height: 90rpx;
     font-size: 30rpx;
   }
@@ -381,14 +462,14 @@
 
 .modal-header {
   padding: 30rpx;
-  border-bottom: 1rpx solid #f3f4f6;
+  border-bottom: 1rpx solid #f1f5f9;
   text-align: center;
 }
 
 .modal-title {
   font-size: 32rpx;
   font-weight: 600;
-  color: #1f2937;
+  color: #1e293b;
 }
 
 .modal-body {
@@ -397,21 +478,22 @@
 
 .modal-text {
   font-size: 28rpx;
-  color: #374151;
+  color: #334155;
   line-height: 1.5;
   display: block;
   margin-bottom: 20rpx;
 }
 
 .answer-stats {
-  background: #f9fafb;
+  background: #f8fafc;
   border-radius: 10rpx;
   padding: 20rpx;
+  border: 1rpx solid #e2e8f0;
 }
 
 .stats-item {
   font-size: 26rpx;
-  color: #6b7280;
+  color: #64748b;
   display: block;
   margin-bottom: 10rpx;
 }
@@ -433,14 +515,30 @@
   border-radius: 15rpx;
   font-size: 28rpx;
   font-weight: 500;
+  box-shadow: 0 4rpx 6rpx rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.modal-btn:active {
+  transform: translateY(2rpx);
+  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
 }
 
 .cancel-btn {
-  background: #f3f4f6;
-  color: #374151;
+  .btn-secondary();
+  height: 80rpx;
+  border-radius: 15rpx;
+  box-shadow: 0 4rpx 6rpx rgba(0, 0, 0, 0.1);
 }
 
 .confirm-btn {
-  background: #ef4444;
-  color: white;
+  .btn-error();
+  height: 80rpx;
+  border-radius: 15rpx;
+  box-shadow: 0 4rpx 6rpx rgba(239, 68, 68, 0.2);
+}
+
+.confirm-btn:active {
+  background: #dc2626;
+  box-shadow: 0 2rpx 4rpx rgba(239, 68, 68, 0.2);
 }

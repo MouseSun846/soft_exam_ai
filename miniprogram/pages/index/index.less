@@ -1,9 +1,10 @@
 /* index.wxss */
 @import '../../styles/adaptive.less';
+@import '../../styles/buttons.less';
 
 .container {
   .responsive-container();
-  background-color: #f8fafc;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
   min-height: 100vh;
   padding-bottom: 160rpx; /* 为底部悬浮菜单留出空间 */
 }
@@ -14,12 +15,25 @@
 }
 
 .welcome-card {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
   border-radius: 20rpx;
   padding: 50rpx 30rpx;
   text-align: center;
   color: white;
-  box-shadow: 0 4rpx 20rpx rgba(102, 126, 234, 0.3);
+  box-shadow: 0 10rpx 25rpx rgba(59, 130, 246, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+  transform: rotate(30deg);
 }
 
 .welcome-title {
@@ -27,11 +41,15 @@
   font-weight: 600;
   display: block;
   margin-bottom: 15rpx;
+  position: relative;
+  z-index: 1;
 }
 
 .welcome-subtitle {
   font-size: 28rpx;
   opacity: 0.9;
+  position: relative;
+  z-index: 1;
 }
 
 /* 快速功能入口 */
@@ -46,14 +64,14 @@
 .title-text {
   font-size: 32rpx;
   font-weight: 600;
-  color: #1f2937;
+  color: #1e293b;
   display: block;
   margin-bottom: 5rpx;
 }
 
 .title-desc {
   font-size: 26rpx;
-  color: #6b7280;
+  color: #64748b;
 }
 
 .action-grid {
@@ -68,23 +86,48 @@
   border-radius: 20rpx;
   padding: 30rpx 20rpx;
   text-align: center;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.action-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(29, 78, 216, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.action-item:hover::before,
+.action-item:active::before {
+  opacity: 1;
 }
 
 .action-item:active {
-  transform: scale(0.98);
+  transform: translateY(2rpx);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.08);
 }
 
 .action-icon {
   font-size: 60rpx;
   margin-bottom: 15rpx;
   display: block;
+  transition: transform 0.3s ease;
+}
+
+.action-item:active .action-icon {
+  transform: scale(1.1);
 }
 
 .action-label {
   font-size: 28rpx;
-  color: #1f2937;
+  color: #1e293b;
   font-weight: 500;
   display: block;
   margin-bottom: 5rpx;
@@ -92,7 +135,7 @@
 
 .action-desc {
   font-size: 22rpx;
-  color: #6b7280;
+  color: #64748b;
 }
 
 /* 今日任务 */
@@ -104,45 +147,64 @@
   background: white;
   border-radius: 20rpx;
   overflow: hidden;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
 }
 
 .task-item {
   display: flex;
   align-items: center;
   padding: 25rpx;
-  border-bottom: 1rpx solid #f3f4f6;
+  border-bottom: 1rpx solid #f1f5f9;
+  transition: background-color 0.2s ease;
 }
 
 .task-item:last-child {
   border-bottom: none;
 }
 
+.task-item:hover {
+  background-color: #f8fafc;
+}
+
 .task-item.completed {
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 .task-checkbox {
   width: 40rpx;
   height: 40rpx;
-  border: 2rpx solid #d1d5db;
+  border: 2rpx solid #cbd5e1;
   border-radius: 50%;
   margin-right: 20rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 
 .task-item.completed .task-checkbox {
   background: #10b981;
   border-color: #10b981;
+  animation: scaleIn 0.3s ease;
+}
+
+@keyframes scaleIn {
+  0% { transform: scale(0); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }
 
 .checkbox-icon {
   color: white;
   font-size: 24rpx;
   font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.task-item.completed .checkbox-icon {
+  opacity: 1;
 }
 
 .task-content {
@@ -158,14 +220,19 @@
 
 .task-title {
   font-size: 28rpx;
-  color: #1f2937;
+  color: #1e293b;
   display: block;
   margin-bottom: 5rpx;
+  font-weight: 500;
+}
+
+.task-item.completed .task-title {
+  text-decoration: line-through;
 }
 
 .task-desc {
   font-size: 24rpx;
-  color: #6b7280;
+  color: #64748b;
   display: block;
   margin-bottom: 10rpx;
 }
@@ -206,7 +273,7 @@
 
 .task-time {
   font-size: 22rpx;
-  color: #6b7280;
+  color: #64748b;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -221,29 +288,38 @@
   background: white;
   border-radius: 20rpx;
   overflow: hidden;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
 }
 
 .activity-item {
   display: flex;
   align-items: center;
   padding: 25rpx;
-  border-bottom: 1rpx solid #f3f4f6;
-  transition: background-color 0.2s ease;
+  border-bottom: 1rpx solid #f1f5f9;
+  transition: all 0.2s ease;
 }
 
 .activity-item:last-child {
   border-bottom: none;
 }
 
-.activity-item:active {
-  background-color: #f9fafb;
+.activity-item:hover {
+  background-color: #f8fafc;
+  transform: translateX(5rpx);
 }
 
 .activity-icon {
   font-size: 40rpx;
   margin-right: 20rpx;
   flex-shrink: 0;
+  width: 50rpx;
+  height: 50rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f9ff;
+  border-radius: 12rpx;
+  color: #3b82f6;
 }
 
 .activity-content {
@@ -252,21 +328,22 @@
 
 .activity-title {
   font-size: 28rpx;
-  color: #1f2937;
+  color: #1e293b;
   display: block;
   margin-bottom: 5rpx;
+  font-weight: 500;
 }
 
 .activity-desc {
   font-size: 24rpx;
-  color: #6b7280;
+  color: #64748b;
   display: block;
   margin-bottom: 5rpx;
 }
 
 .activity-time {
   font-size: 22rpx;
-  color: #9ca3af;
+  color: #94a3b8;
 }
 
 /* 刷新按钮 */
@@ -275,19 +352,24 @@
 }
 
 .refresh-btn {
+  .btn-primary();
   width: 100%;
   height: 80rpx;
-  background: #3b82f6;
-  color: white;
-  border: none;
   border-radius: 15rpx;
   font-size: 28rpx;
-  font-weight: 500;
+  box-shadow: 0 4rpx 6rpx rgba(59, 130, 246, 0.2);
+}
+
+.refresh-btn:active {
+  background: #2563eb;
+  transform: translateY(2rpx);
+  box-shadow: 0 2rpx 4rpx rgba(59, 130, 246, 0.2);
 }
 
 .refresh-btn:disabled {
-  background: #9ca3af;
+  background: #cbd5e1;
   opacity: 0.7;
+  box-shadow: none;
 }
 
 .btn-text {
@@ -299,6 +381,7 @@
   .container {
     padding: 15rpx;
     padding-top: 100rpx;
+    padding-bottom: 160rpx; /* 为底部悬浮菜单留出空间 */
   }
   
   .action-grid {
@@ -324,6 +407,7 @@
   .container {
     padding: 10rpx;
     padding-top: 90rpx;
+    padding-bottom: 160rpx; /* 为底部悬浮菜单留出空间 */
   }
   
   .welcome-card {
@@ -374,6 +458,7 @@
   .container {
     padding: 25rpx;
     padding-top: 130rpx;
+    padding-bottom: 160rpx; /* 为底部悬浮菜单留出空间 */
   }
   
   .welcome-card {

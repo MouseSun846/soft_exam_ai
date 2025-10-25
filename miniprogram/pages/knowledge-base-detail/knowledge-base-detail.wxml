@@ -1,0 +1,69 @@
+<!-- knowledge-base-detail.wxml -->
+<navigation-bar title="知识库详情" background-color="#3b82f6" color="#ffffff"></navigation-bar>
+
+<view class="container">
+  <!-- 知识库信息 -->
+  <view class="knowledge-header">
+    <view class="knowledge-thumb">
+      <image class="thumb-img" src="{{knowledgeBase.thumbnail || '/images/default-knowledge.png'}}" mode="aspectFill"></image>
+    </view>
+    <view class="knowledge-info">
+      <text class="knowledge-name">{{knowledgeBase.name}}</text>
+      <view class="knowledge-meta">
+        <text class="document-count">{{knowledgeBase.documentCount}} 个文档</text>
+        <text class="knowledge-time">更新于 {{knowledgeBase.updatedAt}}</text>
+      </view>
+      <text class="knowledge-description">{{knowledgeBase.description}}</text>
+    </view>
+  </view>
+
+  <!-- 操作栏 -->
+  <view class="action-bar">
+    <button class="action-btn add-btn" bindtap="addDocument">添加文档</button>
+    <button class="action-btn delete-btn" bindtap="deleteKnowledgeBase">删除知识库</button>
+  </view>
+
+  <!-- 文档列表 -->
+  <view class="document-section">
+    <view class="section-header">
+      <text class="section-title">文档列表</text>
+      <text class="document-count">{{filteredDocuments.length}} 个文档</text>
+    </view>
+
+    <view class="search-box">
+      <input 
+        class="search-input" 
+        placeholder="搜索文档..."
+        bindinput="onDocumentSearch"
+        value="{{documentSearchKeyword}}"
+      />
+      <text class="search-icon">🔍</text>
+    </view>
+
+    <view class="document-list">
+      <block wx:for="{{filteredDocuments}}" wx:key="id">
+        <view class="document-item">
+          <view class="document-icon {{item.status}}">{{item.icon}}</view>
+          <view class="document-info" bindtap="viewDocument" data-id="{{item.id}}">
+            <text class="document-name">{{item.name}}</text>
+            <view class="document-meta">
+              <text class="document-type">{{item.type}}</text>
+              <text class="document-size">{{item.size}}</text>
+            </view>
+            <view class="document-progress">
+              <view class="progress-bar">
+                <view class="progress-fill" style="width: {{item.progress}}%"></view>
+              </view>
+              <text class="progress-text">{{item.progress}}%</text>
+            </view>
+          </view>
+          <view class="document-status {{item.status}}">
+            <text class="status-text">{{item.statusText}}</text>
+            <view wx:if="{{item.status === 'parsing'}}" class="loading-spinner"></view>
+          </view>
+          <button class="delete-doc-btn" bindtap="deleteDocument" data-id="{{item.id}}">删除</button>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
