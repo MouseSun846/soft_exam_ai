@@ -2,12 +2,15 @@
 Component({
   data: {
     searchKeyword: '',
-    showUploadModal: false,
     filteredKnowledgeBases: [] as any[],
     allKnowledgeBases: [] as any[],
     // 统计数据
     totalDocuments: 0,
-    parsedDocuments: 0
+    parsedDocuments: 0,
+    // 新增知识库弹窗相关数据
+    showAddKnowledgeModal: false,
+    newKnowledgeName: '',
+    newKnowledgeDescription: ''
   },
 
   lifetimes: {
@@ -96,67 +99,6 @@ Component({
       this.setData({ filteredKnowledgeBases: filtered });
     },
 
-    uploadDocument() {
-      this.setData({ showUploadModal: true });
-    },
-
-    closeUploadModal() {
-      this.setData({ showUploadModal: false });
-    },
-
-    chooseFromWechat() {
-      wx.showToast({
-        title: '功能开发中',
-        icon: 'none'
-      });
-      this.closeUploadModal();
-    },
-
-    chooseFromLocal() {
-      // 创建新知识库的逻辑
-      wx.showModal({
-        title: '创建知识库',
-        content: '请输入新知识库的名称',
-        editable: true,
-        placeholderText: '知识库名称',
-        success: (res) => {
-          if (res.confirm && res.content) {
-            this.createKnowledgeBase(res.content);
-          }
-        }
-      });
-      this.closeUploadModal();
-    },
-
-    createKnowledgeBase(name: string) {
-      wx.showLoading({ title: '创建中...' });
-      
-      // 模拟创建过程
-      setTimeout(() => {
-        wx.hideLoading();
-        wx.showToast({
-          title: '创建成功',
-          icon: 'success'
-        });
-        
-        // 添加到知识库列表
-        const newKnowledgeBase = {
-          id: Date.now(),
-          name: name,
-          description: '新建的知识库',
-          documentCount: 0,
-          updatedAt: this.formatTime(new Date()),
-          thumbnail: ''
-        };
-        
-        this.setData({
-          allKnowledgeBases: [newKnowledgeBase, ...this.data.allKnowledgeBases],
-          filteredKnowledgeBases: [newKnowledgeBase, ...this.data.filteredKnowledgeBases],
-          totalDocuments: this.data.totalDocuments
-        });
-      }, 1000);
-    },
-
     viewKnowledgeBase(e: any) {
       const kbId = e.currentTarget.dataset.id;
       wx.navigateTo({
@@ -207,6 +149,85 @@ Component({
       const month = String(date.getMonth() + 1).padStart(2, '0');
       const day = String(date.getDate()).padStart(2, '0');
       return `${year}-${month}-${day}`;
+    },
+
+    // 显示新增知识库弹窗
+    showAddKnowledgeModal() {
+      this.setData({
+        showAddKnowledgeModal: true,
+        newKnowledgeName: '',
+        newKnowledgeDescription: ''
+      });
+    },
+
+    // 关闭新增知识库弹窗
+    closeAddKnowledgeModal() {
+      this.setData({
+        showAddKnowledgeModal: false,
+        newKnowledgeName: '',
+        newKnowledgeDescription: ''
+      });
+    },
+
+    // 输入知识库名称
+    onNameInput(e: any) {
+      this.setData({
+        newKnowledgeName: e.detail.value
+      });
+    },
+
+    // 输入知识库描述
+    onDescriptionInput(e: any) {
+      this.setData({
+        newKnowledgeDescription: e.detail.value
+      });
+    },
+
+    // 新增知识库
+    addKnowledgeBase() {
+      const { newKnowledgeName, newKnowledgeDescription } = this.data;
+      
+      // 验证输入
+      if (!newKnowledgeName.trim()) {
+        wx.showToast({
+          title: '请输入知识库名称',
+          icon: 'none'
+        });
+        return;
+      }
+      
+      // 创建新知识库
+      const newKnowledgeBase = {
+        id: Date.now(), // 使用时间戳作为唯一ID
+        name: newKnowledgeName,
+        description: newKnowledgeDescription || '暂无描述',
+        documentCount: 0,
+        updatedAt: this.formatTime(new Date()),
+        thumbnail: ''
+      };
+      
+      // 更新数据
+      const updatedKnowledgeBases = [newKnowledgeBase, ...this.data.allKnowledgeBases];
+      
+      // 重新计算统计数据
+      let totalDocs = 0;
+      updatedKnowledgeBases.forEach(kb => {
+        totalDocs += kb.documentCount;
+      });
+      
+      this.setData({
+        allKnowledgeBases: updatedKnowledgeBases,
+        filteredKnowledgeBases: updatedKnowledgeBases,
+        totalDocuments: totalDocs,
+        showAddKnowledgeModal: false,
+        newKnowledgeName: '',
+        newKnowledgeDescription: ''
+      });
+      
+      wx.showToast({
+        title: '新增成功',
+        icon: 'success'
+      });
     }
   }
 });

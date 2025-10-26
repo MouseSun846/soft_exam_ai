@@ -37,12 +37,41 @@
   flex: 1;
 }
 
+.knowledge-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
 .knowledge-name {
   font-size: 32rpx;
   font-weight: 600;
   color: #1e293b;
   display: block;
-  margin-bottom: 10rpx;
+}
+
+.knowledge-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 1;
+}
+
+.delete-icon-btn {
+  background: none !important;
+  border: none !important;
+  font-size: 36rpx !important;
+  padding: 10rpx !important;
+  border-radius: 50% !important;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  width: auto !important;
+  margin: 0 !important;
+  
+  &:active {
+    background-color: #f1f5f9 !important;
+  }
 }
 
 .knowledge-meta {
@@ -62,35 +91,43 @@
   line-height: 1.5;
 }
 
-/* 操作栏 */
-.action-bar {
-  display: flex;
-  gap: 20rpx;
+/* 上传区域 */
+.upload-section {
+  background: white;
+  border-radius: 20rpx;
+  padding: 40rpx 30rpx;
   margin-bottom: 30rpx;
-}
-
-.action-btn {
-  flex: 1;
-  border: none;
-  border-radius: 15rpx;
-  padding: 20rpx;
-  font-size: 28rpx;
-  font-weight: 500;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+  text-align: center;
+  cursor: pointer;
   transition: all 0.2s ease;
+  
+  &:active {
+    transform: translateY(2rpx);
+    box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+  }
 }
 
-.add-btn {
-  background: #3b82f6;
-  color: white;
+.upload-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15rpx;
 }
 
-.delete-btn {
-  background: #ef4444;
-  color: white;
+.upload-icon {
+  font-size: 60rpx;
 }
 
-.action-btn:active {
-  transform: translateY(2rpx);
+.upload-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.upload-desc {
+  font-size: 24rpx;
+  color: #64748b;
 }
 
 /* 搜索框 */
@@ -256,17 +293,34 @@
 
 /* 删除按钮 */
 .delete-doc-btn {
-  background: #ef4444;
-  color: white;
-  border: none;
-  border-radius: 10rpx;
-  padding: 10rpx 15rpx;
-  font-size: 22rpx;
-  white-space: nowrap;
+  background: none !important;
+  border: none !important;
+  font-size: 36rpx !important;
+  padding: 10rpx !important;
+  border-radius: 50% !important;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  width: auto !important;
+  margin: 0 !important;
+  line-height: 1;
+  text-indent: -9999px; /* 隐藏文字 */
+  position: relative;
+  min-width: 56rpx;
+  min-height: 56rpx;
+}
+
+.delete-doc-btn:before {
+  content: '🗑️';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-indent: 0;
+  font-size: 36rpx;
 }
 
 .delete-doc-btn:active {
-  background: #dc2626;
+  background-color: #f1f5f9 !important;
 }
 
 /* 加载动画 */
@@ -282,6 +336,105 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* 上传弹窗 */
+.upload-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  
+  &.show {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.modal-content {
+  background: white;
+  border-radius: 20rpx;
+  width: 80%;
+  max-width: 600rpx;
+  overflow: hidden;
+  transform: translateY(50rpx);
+  transition: transform 0.3s ease;
+  
+  .upload-modal.show & {
+    transform: translateY(0);
+  }
+}
+
+.modal-header {
+  padding: 30rpx;
+  border-bottom: 1rpx solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.modal-close {
+  font-size: 40rpx;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 10rpx;
+}
+
+.upload-options {
+  padding: 30rpx;
+}
+
+.upload-option {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  border-radius: 15rpx;
+  background: #f8fafc;
+  margin-bottom: 20rpx;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+  
+  &:active {
+    background: #f1f5f9;
+    transform: translateY(2rpx);
+  }
+}
+
+.option-icon {
+  font-size: 48rpx;
+  margin-right: 20rpx;
+}
+
+.option-title {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #1e293b;
+  display: block;
+  margin-bottom: 5rpx;
+}
+
+.option-desc {
+  font-size: 24rpx;
+  color: #64748b;
 }
 
 /* 响应式调整 */
@@ -317,13 +470,33 @@
     font-size: 24rpx;
   }
   
-  .action-bar {
-    gap: 15rpx;
+  .upload-section {
+    padding: 30rpx 20rpx;
   }
   
-  .action-btn {
-    padding: 15rpx;
+  .upload-icon {
+    font-size: 50rpx;
+  }
+  
+  .upload-title {
+    font-size: 28rpx;
+  }
+  
+  .upload-desc {
+    font-size: 22rpx;
+  }
+  
+  .knowledge-header-row {
+    margin-bottom: 8rpx;
+  }
+  
+  .knowledge-name {
     font-size: 26rpx;
+  }
+  
+  .delete-icon-btn {
+    font-size: 32rpx;
+    padding: 8rpx;
   }
   
   .search-input {
@@ -360,5 +533,38 @@
   .delete-doc-btn {
     padding: 8rpx 12rpx;
     font-size: 20rpx;
+  }
+  
+  .modal-content {
+    width: 90%;
+  }
+  
+  .modal-header {
+    padding: 20rpx;
+  }
+  
+  .modal-title {
+    font-size: 28rpx;
+  }
+  
+  .upload-options {
+    padding: 20rpx;
+  }
+  
+  .upload-option {
+    padding: 20rpx;
+  }
+  
+  .option-icon {
+    font-size: 40rpx;
+    margin-right: 15rpx;
+  }
+  
+  .option-title {
+    font-size: 26rpx;
+  }
+  
+  .option-desc {
+    font-size: 22rpx;
   }
 }

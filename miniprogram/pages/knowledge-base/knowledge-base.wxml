@@ -8,7 +8,7 @@
 
 <view class="container">
   <!-- 搜索和操作栏 -->
-  <view class="search-section" bindtap="goToSearch">
+  <view class="search-section">
     <view class="search-box">
       <text class="search-icon">🔍</text>
       <input 
@@ -19,14 +19,9 @@
         disabled
       />
     </view>
-  </view>
-
-  <!-- 上传区域 -->
-  <view class="upload-section" bindtap="uploadDocument">
-    <view class="upload-content">
-      <text class="upload-icon">📄</text>
-      <text class="upload-title">上传复习资料</text>
-      <text class="upload-desc">支持 .txt, .doc, .docx, .md, .pdf 格式</text>
+    <!-- 新增知识库按钮 -->
+    <view class="add-knowledge-btn" bindtap="showAddKnowledgeModal">
+      <text class="add-icon">➕</text>
     </view>
   </view>
 
@@ -80,24 +75,30 @@
 <!-- 底部悬浮菜单 -->
 <bottom-tabbar current-tab="{{1}}"></bottom-tabbar>
 
-<!-- 上传弹窗 -->
-<view class="upload-modal {{showUploadModal ? 'show' : ''}}">
+<!-- 新增知识库弹窗 -->
+<view class="add-knowledge-modal {{showAddKnowledgeModal ? 'show' : ''}}">
   <view class="modal-content">
     <view class="modal-header">
-      <text class="modal-title">选择上传方式</text>
-      <text class="modal-close" bindtap="closeUploadModal">×</text>
+      <text class="modal-title">新增知识库</text>
+      <text class="modal-close" bindtap="closeAddKnowledgeModal">×</text>
     </view>
-    <view class="upload-options">
-      <view class="upload-option" bindtap="chooseFromWechat">
-        <text class="option-icon">💬</text>
-        <text class="option-title">微信聊天记录</text>
-        <text class="option-desc">从微信聊天中选择文件</text>
-      </view>
-      <view class="upload-option" bindtap="chooseFromLocal">
-        <text class="option-icon">📱</text>
-        <text class="option-title">手机本地文件</text>
-        <text class="option-desc">从手机存储中选择</text>
-      </view>
+    <view class="modal-body">
+      <input 
+        class="input-field" 
+        placeholder="请输入知识库名称" 
+        bindinput="onNameInput" 
+        value="{{newKnowledgeName}}"
+      />
+      <textarea 
+        class="textarea-field" 
+        placeholder="请输入知识库描述" 
+        bindinput="onDescriptionInput" 
+        value="{{newKnowledgeDescription}}"
+      />
+    </view>
+    <view class="modal-footer">
+      <button class="cancel-btn" bindtap="closeAddKnowledgeModal">取消</button>
+      <button class="confirm-btn" bindtap="addKnowledgeBase">确定</button>
     </view>
   </view>
 </view>

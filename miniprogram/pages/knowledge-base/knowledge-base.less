@@ -9,66 +9,40 @@
   padding-bottom: 160rpx; /* 为底部悬浮菜单留出空间 */
 }
 
-/* 页面头部 */
-.page-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 120rpx;
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
-  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
-}
-
-.page-header-title {
-  color: white;
-  font-size: 36rpx;
-  font-weight: 600;
-}
-
-.page-header-placeholder {
-  height: 120rpx;
-}
 
 /* 搜索和操作栏 */
 .search-section {
-  margin-bottom: 30rpx;
   display: flex;
-  gap: 20rpx;
+  justify-content: space-between;
   align-items: center;
+  margin-bottom: 30rpx;
+  width: 100%;
 }
 
 .search-box {
-  flex: 1;
-  position: relative;
-  max-width: none;
+  display: flex;
+  align-items: center;
+  height: 80rpx;
   background: #f8fafc;
   border: 1rpx solid #e2e8f0;
   border-radius: 40rpx;
-  height: 80rpx;
-  display: flex;
-  align-items: center;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  overflow: hidden;
+  flex-grow: 1; /* 让搜索框占据多余空间 */
+  margin-right: 20rpx; /* 与右侧按钮保持间距 */
 }
 
 .search-input {
-  flex: 1;
-  height: 80rpx;
-  padding: 0 20rpx;
-  background: transparent;
-  border: none;
-  border-radius: 40rpx;
-  font-size: 28rpx;
-  box-shadow: none;
-  transition: all 0.2s ease;
-  box-sizing: border-box;
-  color: #1e293b;
-  // 解决文字与图标重叠问题
-  text-overflow: ellipsis;
+  width: 100%; /* 宽度设置为100%，填满父容器 */
   min-width: 0;
+  height: 100%;
+  border: none;
+  background: transparent;
+  font-size: 28rpx;
+  color: #1e293b;
+  padding: 0;
+  box-shadow: none;
 }
 
 .search-input:focus {
@@ -79,80 +53,31 @@
 .search-icon {
   font-size: 28rpx;
   color: #94a3b8;
-  pointer-events: none;
-  z-index: 1;
-  padding: 0 20rpx;
+  margin-right: 10rpx;
 }
 
-/* 上传区域 */
-.upload-section {
-  background: white;
-  border: 2rpx dashed #cbd5e1;
-  border-radius: 20rpx;
-  padding: 60rpx 30rpx;
-  text-align: center;
-  margin-bottom: 30rpx;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.upload-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.03) 0%, rgba(29, 78, 216, 0.03) 100%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.upload-section:hover::before,
-.upload-section:active::before {
-  opacity: 1;
-}
-
-.upload-section:active {
-  border-color: #3b82f6;
-  background-color: #f0f9ff;
-  transform: translateY(2rpx);
-}
-
-.upload-content {
+/* 新增知识库按钮 */
+.add-knowledge-btn {
+  flex-shrink: 0; /* 防止按钮被压缩 */
+  width: 80rpx;
+  height: 80rpx;
+  background: linear-gradient(135deg, #60a5fa, #3b82f6);
+  border-radius: 40rpx;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  position: relative;
-  z-index: 1;
+  justify-content: center;
+  box-shadow: 0 4rpx 12rpx rgba(59, 130, 246, 0.2);
+  transition: all 0.2s ease;
 }
 
-.upload-icon {
-  font-size: 80rpx;
-  margin-bottom: 20rpx;
-  display: block;
-  color: #3b82f6;
-  animation: pulse 2s infinite;
+.add-knowledge-btn:active {
+  transform: translateY(2rpx);
+  box-shadow: 0 2rpx 6rpx rgba(59, 130, 246, 0.2); /* 减淡阴影 */
 }
 
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
-}
-
-.upload-title {
-  font-size: 32rpx;
-  font-weight: 600;
-  color: #1e293b;
-  margin-bottom: 10rpx;
-  display: block;
-}
-
-.upload-desc {
-  font-size: 26rpx;
-  color: #64748b;
+.add-icon {
+  font-size: 40rpx;
+  color: white;
 }
 
 /* 统计卡片 */
@@ -342,8 +267,8 @@
   box-shadow: 0 1rpx 2rpx rgba(239, 68, 68, 0.2);
 }
 
-/* 上传弹窗 */
-.upload-modal {
+/* 新增知识库弹窗 */
+.add-knowledge-modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -359,7 +284,7 @@
   z-index: 1000;
 }
 
-.upload-modal.show {
+.add-knowledge-modal.show {
   opacity: 1;
   visibility: visible;
 }
@@ -377,7 +302,7 @@
   transition: transform 0.3s ease;
 }
 
-.upload-modal.show .modal-content {
+.add-knowledge-modal.show .modal-content {
   transform: scale(1);
 }
 
@@ -408,56 +333,57 @@
   color: #64748b;
 }
 
-.upload-options {
-  padding: 20rpx;
+.modal-body {
+  padding: 30rpx;
 }
 
-.upload-option {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40rpx 20rpx;
-  border-radius: 15rpx;
-  margin-bottom: 20rpx;
+.input-field {
+  width: 100%;
+  height: 80rpx;
+  padding: 0 20rpx;
   background: #f8fafc;
-  transition: all 0.2s ease;
-  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.05);
-}
-
-.upload-option:hover {
-  background: #f1f5f9;
-  transform: translateY(-2rpx);
-  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.08);
-}
-
-.upload-option:active {
-  background: #e2e8f0;
-  transform: translateY(0);
-}
-
-.upload-option:last-child {
-  margin-bottom: 0;
-}
-
-.option-icon {
-  font-size: 60rpx;
-  margin-bottom: 20rpx;
-  display: block;
-  color: #3b82f6;
-}
-
-.option-title {
+  border: 1rpx solid #e2e8f0;
+  border-radius: 12rpx;
   font-size: 28rpx;
-  font-weight: 600;
-  color: #1e293b;
-  margin-bottom: 10rpx;
-  display: block;
+  box-sizing: border-box;
+  margin-bottom: 20rpx;
 }
 
-.option-desc {
-  font-size: 24rpx;
-  color: #64748b;
-  text-align: center;
+.textarea-field {
+  width: 100%;
+  height: 160rpx;
+  padding: 20rpx;
+  background: #f8fafc;
+  border: 1rpx solid #e2e8f0;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+  resize: none;
+}
+
+.modal-footer {
+  display: flex;
+  padding: 30rpx;
+  gap: 20rpx;
+}
+
+.cancel-btn {
+  .btn();
+  flex: 1;
+  height: 80rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+  border-radius: 12rpx;
+}
+
+.confirm-btn {
+  .btn-primary();
+  flex: 1;
+  height: 80rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+  border-radius: 12rpx;
+  box-shadow: 0 4rpx 12rpx rgba(59, 130, 246, 0.3);
 }
 
 /* 文本省略 */
@@ -476,37 +402,34 @@
   }
   
   .search-section {
-    flex-direction: column;
-    gap: 15rpx;
+    flex-direction: row; /* 保持水平排列 */
+    justify-content: space-between; /* 保持两端对齐 */
+  }
+  
+  .search-box {
+    /* 移除固定的宽度，使其自适应 */
+    overflow: hidden;
   }
   
   .search-input {
     height: 70rpx;
     font-size: 26rpx;
     padding: 0 60rpx 0 20rpx;
+    max-width: ~'calc(100% - 50rpx)';
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
   }
   
-  .upload-btn {
+  .add-knowledge-btn {
+    width: 70rpx;
     height: 70rpx;
-    font-size: 26rpx;
-    padding: 0 20rpx;
-    width: 100%;
+    background: linear-gradient(135deg, #60a5fa, #3b82f6); /* 更淡的蓝色渐变 */
+    box-shadow: 0 4rpx 12rpx rgba(59, 130, 246, 0.2); /* 减淡阴影 */
   }
   
-  .upload-section {
-    padding: 40rpx 20rpx;
-  }
-  
-  .upload-icon {
-    font-size: 60rpx;
-  }
-  
-  .upload-title {
-    font-size: 28rpx;
-  }
-  
-  .upload-desc {
-    font-size: 24rpx;
+  .add-icon {
+    font-size: 30rpx;
   }
   
   .stats-section {
@@ -559,25 +482,23 @@
     min-width: 80rpx;
   }
   
-  .modal-content {
-    margin: 20rpx;
-    width: calc(100% - 40rpx);
-  }
-  
-  .upload-option {
-    padding: 30rpx 15rpx;
-  }
-  
-  .option-icon {
-    font-size: 50rpx;
-  }
-  
-  .option-title {
+  .input-field {
+    height: 70rpx;
     font-size: 26rpx;
   }
   
-  .option-desc {
-    font-size: 22rpx;
+  .textarea-field {
+    height: 140rpx;
+    font-size: 26rpx;
+  }
+  
+  .modal-footer {
+    padding: 20rpx;
+  }
+  
+  .cancel-btn, .confirm-btn {
+    height: 70rpx;
+    font-size: 26rpx;
   }
 }
 
@@ -590,37 +511,34 @@
   }
   
   .search-section {
-    flex-direction: column;
-    gap: 15rpx;
+    flex-direction: row; /* 保持水平排列 */
+    justify-content: space-between; /* 保持两端对齐 */
+  }
+  
+  .search-box {
+    /* 移除固定的宽度，使其自适应 */
+    overflow: hidden;
   }
   
   .search-input {
     height: 70rpx;
     font-size: 26rpx;
     padding: 0 60rpx 0 20rpx;
+    max-width: ~'calc(100% - 50rpx)';
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
   }
   
-  .upload-btn {
+  .add-knowledge-btn {
+    width: 70rpx;
     height: 70rpx;
-    font-size: 26rpx;
-    padding: 0 20rpx;
-    width: 100%;
+    background: linear-gradient(135deg, #60a5fa, #3b82f6); /* 更淡的蓝色渐变 */
+    box-shadow: 0 4rpx 12rpx rgba(59, 130, 246, 0.2); /* 减淡阴影 */
   }
   
-  .upload-section {
-    padding: 40rpx 20rpx;
-  }
-  
-  .upload-icon {
-    font-size: 60rpx;
-  }
-  
-  .upload-title {
-    font-size: 28rpx;
-  }
-  
-  .upload-desc {
-    font-size: 24rpx;
+  .add-icon {
+    font-size: 30rpx;
   }
   
   .stats-section {
@@ -672,25 +590,24 @@
     min-width: 70rpx;
   }
   
-  .modal-content {
-    margin: 20rpx;
-    width: calc(100% - 40rpx);
-  }
-  
-  .upload-option {
-    padding: 30rpx 15rpx;
-  }
-  
-  .option-icon {
-    font-size: 50rpx;
-  }
-  
-  .option-title {
+  .input-field {
+    height: 70rpx;
     font-size: 26rpx;
   }
   
-  .option-desc {
-    font-size: 22rpx;
+  .textarea-field {
+    height: 140rpx;
+    font-size: 26rpx;
+  }
+  
+  .modal-footer {
+    padding: 20rpx;
+    gap: 10rpx;
+  }
+  
+  .cancel-btn, .confirm-btn {
+    height: 70rpx;
+    font-size: 26rpx;
   }
 }
 
@@ -701,32 +618,34 @@
     padding-bottom: 160rpx; /* 为底部悬浮菜单留出空间 */
   }
   
+  .search-section {
+    justify-content: space-between; /* 保持两端对齐 */
+  }
+  
+  .search-box {
+    /* 移除固定的宽度，使其自适应 */
+    overflow: hidden;
+  }
+  
   .search-input {
     height: 90rpx;
     font-size: 30rpx;
     padding: 0 90rpx 0 30rpx;
+    max-width: ~'calc(100% - 70rpx)';
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
   }
   
-  .upload-btn {
+  .add-knowledge-btn {
+    width: 90rpx;
     height: 90rpx;
-    font-size: 30rpx;
-    padding: 0 40rpx;
+    background: linear-gradient(135deg, #60a5fa, #3b82f6); /* 更淡的蓝色渐变 */
+    box-shadow: 0 4rpx 12rpx rgba(59, 130, 246, 0.2); /* 减淡阴影 */
   }
   
-  .upload-section {
-    padding: 80rpx 40rpx;
-  }
-  
-  .upload-icon {
-    font-size: 100rpx;
-  }
-  
-  .upload-title {
-    font-size: 36rpx;
-  }
-  
-  .upload-desc {
-    font-size: 28rpx;
+  .add-icon {
+    font-size: 50rpx;
   }
   
   .stats-section {
@@ -779,24 +698,22 @@
     min-width: 100rpx;
   }
   
-  .modal-content {
-    margin: 60rpx;
-    max-width: 700rpx;
-  }
-  
-  .upload-option {
-    padding: 50rpx 25rpx;
-  }
-  
-  .option-icon {
-    font-size: 70rpx;
-  }
-  
-  .option-title {
+  .input-field {
+    height: 90rpx;
     font-size: 30rpx;
   }
   
-  .option-desc {
-    font-size: 26rpx;
+  .textarea-field {
+    height: 180rpx;
+    font-size: 30rpx;
+  }
+  
+  .modal-footer {
+    padding: 40rpx;
+  }
+  
+  .cancel-btn, .confirm-btn {
+    height: 90rpx;
+    font-size: 30rpx;
   }
 }

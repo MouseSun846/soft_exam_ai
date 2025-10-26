@@ -12,7 +12,8 @@ Page({
     } as any,
     documentSearchKeyword: '',
     filteredDocuments: [] as any[],
-    allDocuments: [] as any[]
+    allDocuments: [] as any[],
+    showUploadModal: false
   },
 
   onLoad(options: any) {
@@ -108,7 +109,24 @@ Page({
     this.setData({ filteredDocuments: filtered });
   },
 
-  addDocument() {
+  // 上传文档相关方法
+  uploadDocument() {
+    this.setData({ showUploadModal: true });
+  },
+
+  closeUploadModal() {
+    this.setData({ showUploadModal: false });
+  },
+
+  chooseFromWechat() {
+    wx.showToast({
+      title: '功能开发中',
+      icon: 'none'
+    });
+    this.closeUploadModal();
+  },
+
+  chooseFromLocal() {
     wx.chooseMessageFile({
       count: 1,
       type: 'file',
@@ -117,6 +135,7 @@ Page({
         this.uploadFile(tempFile);
       }
     });
+    this.closeUploadModal();
   },
 
   uploadFile(file: any) {

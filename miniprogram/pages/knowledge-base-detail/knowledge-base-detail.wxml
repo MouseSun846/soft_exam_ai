@@ -8,19 +8,27 @@
       <image class="thumb-img" src="{{knowledgeBase.thumbnail || '/images/default-knowledge.png'}}" mode="aspectFill"></image>
     </view>
     <view class="knowledge-info">
-      <text class="knowledge-name">{{knowledgeBase.name}}</text>
+      <view class="knowledge-header-row">
+        <text class="knowledge-name">{{knowledgeBase.name}}</text>
+      </view>
       <view class="knowledge-meta">
         <text class="document-count">{{knowledgeBase.documentCount}} 个文档</text>
         <text class="knowledge-time">更新于 {{knowledgeBase.updatedAt}}</text>
       </view>
       <text class="knowledge-description">{{knowledgeBase.description}}</text>
     </view>
+    <view class="knowledge-actions">
+      <button class="delete-icon-btn" bindtap="deleteKnowledgeBase">🗑️</button>
+    </view>
   </view>
 
-  <!-- 操作栏 -->
-  <view class="action-bar">
-    <button class="action-btn add-btn" bindtap="addDocument">添加文档</button>
-    <button class="action-btn delete-btn" bindtap="deleteKnowledgeBase">删除知识库</button>
+  <!-- 上传区域 -->
+  <view class="upload-section" bindtap="uploadDocument">
+    <view class="upload-content">
+      <text class="upload-icon">📄</text>
+      <text class="upload-title">上传复习资料</text>
+      <text class="upload-desc">支持 .txt, .doc, .docx, .md, .pdf 格式</text>
+    </view>
   </view>
 
   <!-- 文档列表 -->
@@ -64,6 +72,28 @@
           <button class="delete-doc-btn" bindtap="deleteDocument" data-id="{{item.id}}">删除</button>
         </view>
       </block>
+    </view>
+  </view>
+</view>
+
+<!-- 上传弹窗 -->
+<view class="upload-modal {{showUploadModal ? 'show' : ''}}">
+  <view class="modal-content">
+    <view class="modal-header">
+      <text class="modal-title">选择上传方式</text>
+      <text class="modal-close" bindtap="closeUploadModal">×</text>
+    </view>
+    <view class="upload-options">
+      <view class="upload-option" bindtap="chooseFromWechat">
+        <text class="option-icon">💬</text>
+        <text class="option-title">微信聊天记录</text>
+        <text class="option-desc">从微信聊天中选择文件</text>
+      </view>
+      <view class="upload-option" bindtap="chooseFromLocal">
+        <text class="option-icon">📱</text>
+        <text class="option-title">手机本地文件</text>
+        <text class="option-desc">从手机存储中选择</text>
+      </view>
     </view>
   </view>
 </view>
