@@ -17,6 +17,7 @@
         bindinput="onSearchInput"
         value="{{searchKeyword}}"
         disabled
+        bindtap="goToSearch"
       />
     </view>
     <!-- 新增知识库按钮 -->
@@ -63,8 +64,9 @@
             <view class="knowledge-description">{{item.description}}</view>
           </view>
           <view class="knowledge-actions">
-            <button class="action-btn view-btn" bindtap="viewKnowledgeBase" data-id="{{item.id}}">查看</button>
-            <button class="action-btn delete-btn" bindtap="deleteKnowledgeBase" data-id="{{item.id}}" catchtap="stopEventPropagation">删除</button>
+            <view class="delete-icon-btn" catchtap="deleteKnowledgeBase" data-id="{{item.id}}">
+              <text class="delete-icon">🗑️</text>
+            </view>
           </view>
         </view>
       </block>
